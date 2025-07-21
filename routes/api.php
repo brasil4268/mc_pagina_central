@@ -22,4 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 use App\Http\Controllers\Api\CentroController;
 
+//Rota para pegar todos
 Route::get('/centros', [CentroController::class, 'index']);
+//Rota para criar
+Route::post('/centros', [CentroController::class, 'store']);
+//Rota para pegar por ID
+Route::get('/centros/{id}', [CentroController::class, 'show']);
+//Rota para update
+Route::put('/centros/{id}', [CentroController::class, 'update']);
+//Rota para o delete
+Route::delete('/centros/{id}', [CentroController::class, 'destroy']);

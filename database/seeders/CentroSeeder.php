@@ -18,14 +18,14 @@ class CentroSeeder extends Seeder
         Centro::create([
             'nome' => 'MC1',
             'localizacao' => 'Vila de Viana',
-            'contacto' => '923456789',
+            'contactos' => ['923456789'],
             'email' => 'vila@centro.ao',
         ]);
 
         Centro::create([
             'nome' => 'MC2',
             'localizacao' => 'Kimbango',
-            'contacto' => '924567890',
+            'contactos' => ['924567890', '975678901'],
             'email' => 'kimbango@centro.ao',
         ]);
 

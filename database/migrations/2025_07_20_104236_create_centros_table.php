@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome')->unique();
             $table->string('localizacao');
-            $table->string('contacto');
+            $table->json('contactos');
             $table->string('email')->nullable();
             $table->timestamps();
         });
