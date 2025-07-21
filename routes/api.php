@@ -32,3 +32,13 @@ Route::get('/centros/{id}', [CentroController::class, 'show']);
 Route::put('/centros/{id}', [CentroController::class, 'update']);
 //Rota para o delete
 Route::delete('/centros/{id}', [CentroController::class, 'destroy']);
+
+
+//ROTAS PARA CURSOS
+use App\Http\Controllers\Api\CursoController;
+//Rota para pegar todos os cursos
+Route::get('/cursos', [CursoController::class, 'index']);
+Route::post('/cursos', [CursoController::class, 'store']);
+Route::get('/cursos/{id}', [CursoController::class, 'show']);
+Route::put('/cursos/{id}', [CursoController::class, 'update']);
+Route::delete('/cursos/{id}', [CursoController::class, 'destroy']);
