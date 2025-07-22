@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Cursos - EduGest</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .curso-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+            margin-bottom: 20px;
+        }
+        
+        .curso-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .curso-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .curso-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .curso-centro {
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .curso-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-ativo {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+        
+        .status-inativo {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        
+        .curso-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .info-item i {
+            color: var(--secondary-color);
+            width: 16px;
+        }
+        
+        .curso-descricao {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .curso-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .curso-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+        }
+        
+        .price-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--success-color);
+        }
+        
+        .modalidade-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .modalidade-presencial {
+            background: #dbeafe;
+            color: var(--primary-color);
+            border: 1px solid #93c5fd;
+        }
+        
+        .modalidade-online {
+            background: #dcfce7;
+            color: var(--success-color);
+            border: 1px solid #86efac;
+        }
+        
+        @media (max-width: 768px) {
+            .curso-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .curso-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .curso-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>EduGest</span>
+        </a>
+        
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                Início
+            </a>
+            <a href="centros.html" class="nav-link">
+                <i class="fas fa-building"></i>
+                Centros
+            </a>
+            <a href="cursos.html" class="nav-link active">
+                <i class="fas fa-book"></i>
+                Cursos
+            </a>
+            <a href="formadores.html" class="nav-link">
+                <i class="fas fa-chalkboard-teacher"></i>
+                Formadores
+            </a>
+            <a href="horarios.html" class="nav-link">
+                <i class="fas fa-clock"></i>
+                Horários
+            </a>
+            <a href="dashboard.html" class="nav-link">
+                <i class="fas fa-chart-dashboard"></i>
+                Dashboard
+            </a>
+            <button id="theme-toggle" class="btn btn-outline btn-sm">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    Gestão de Cursos
+                </div>
+            </div>
+            <p style="color: #666; margin: 0;">
+                Gerencie todos os cursos oferecidos pelos centros de formação
+            </p>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="total-cursos">0</div>
+                <div class="stat-label">Total de Cursos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="cursos-ativos">0</div>
+                <div class="stat-label">Cursos Ativos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="areas-diferentes">0</div>
+                <div class="stat-label">Áreas Diferentes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="preco-medio">0</div>
+                <div class="stat-label">Preço Médio</div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filter-section">
+            <h3 style="color: var(--primary-color); margin-bottom: 5px;">
+                <i class="fas fa-filter"></i> Filtros
+            </h3>
+            <p style="color: #666; margin-bottom: 0;">Use os filtros abaixo para refinar sua busca</p>
+            
+            <div class="filter-grid">
+                <div class="form-group">
+                    <label class="form-label">Buscar curso</label>
+                    <div class="input-group">
+                        <input type="text" id="busca-curso" class="form-control" placeholder="Nome do curso...">
+                        <i class="fas fa-search input-group-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Centro</label>
+                    <select id="filtro-centro" class="form-control">
+                        <option value="">Todos os centros</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Área</label>
+                    <select id="filtro-area" class="form-control">
+                        <option value="">Todas as áreas</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Modalidade</label>
+                    <select id="filtro-modalidade" class="form-control">
+                        <option value="">Todas as modalidades</option>
+                        <option value="presencial">Presencial</option>
+                        <option value="online">Online</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select id="filtro-status" class="form-control">
+                        <option value="">Todos os status</option>
+                        <option value="1">Ativos</option>
+                        <option value="0">Inativos</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-secondary w-100" onclick="limparFiltros()" style="margin-top: 25px;">
+                        <i class="fas fa-times"></i> Limpar Filtros
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles -->
+        <div class="flex-between mb-3">
+            <div>
+                <button class="btn btn-primary" onclick="abrirModalCurso()">
+                    <i class="fas fa-plus"></i> Novo Curso
+                </button>
+                <button class="btn btn-outline" onclick="exportarCursos()">
+                    <i class="fas fa-download"></i> Exportar
+                </button>
+            </div>
+            
+            <div class="flex gap-1">
+                <select id="ordernar-por" class="form-control" style="width: auto;">
+                    <option value="nome">Ordenar por Nome</option>
+                    <option value="preco">Ordenar por Preço</option>
+                    <option value="duracao">Ordenar por Duração</option>
+                    <option value="updated_at">Ordenar por Data</option>
+                </select>
+                
+                <button id="ordem-direcao" class="btn btn-outline" onclick="alterarOrdem()">
+                    <i class="fas fa-sort-alpha-up"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Lista de Cursos -->
+        <div id="cursos-container">
+            <div class="curso-grid" id="lista-cursos">
+                <!-- Os cursos serão carregados aqui -->
+            </div>
+            
+            <!-- Estado vazio -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <i class="fas fa-book-open"></i>
+                <h3>Nenhum curso encontrado</h3>
+                <p>Não há cursos cadastrados ou que correspondam aos filtros aplicados.</p>
+                <button class="btn btn-primary" onclick="abrirModalCurso()">
+                    <i class="fas fa-plus"></i> Cadastrar Primeiro Curso
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Curso -->
+    <div id="modal-curso" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-curso-title">
+                    <i class="fas fa-book"></i>
+                    Novo Curso
+                </h2>
+                <button class="modal-close" onclick="fecharModalCurso()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div id="alert-container-curso"></div>
+                
+                <form id="form-curso" class="ajax-form" data-url="/api/cursos" data-method="POST">
+                    <div class="form-group">
+                        <label class="form-label" for="curso-centro-id">Centro de Formação *</label>
+                        <select id="curso-centro-id" name="centro_id" class="form-control" required>
+                            <option value="">Selecione um centro</option>
+                        </select>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="curso-nome">Nome do Curso *</label>
+                        <input type="text" id="curso-nome" name="nome" class="form-control" 
+                               placeholder="Ex: Desenvolvimento Web Full Stack" maxlength="150" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="curso-descricao">Descrição</label>
+                        <textarea id="curso-descricao" name="descricao" class="form-control" 
+                                  rows="3" placeholder="Descrição detalhada do curso..."></textarea>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="curso-programa">Programa do Curso</label>
+                        <textarea id="curso-programa" name="programa" class="form-control" 
+                                  rows="4" placeholder="Conteúdo programático do curso..."></textarea>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="form-label" for="curso-duracao">Duração (horas) *</label>
+                            <input type="number" id="curso-duracao" name="duracao" class="form-control" 
+                                   min="1" max="10000" placeholder="Ex: 40" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="curso-preco">Preço (AOA) *</label>
+                            <input type="number" id="curso-preco" name="preco" class="form-control" 
+                                   min="0" step="0.01" placeholder="Ex: 25000.00" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="form-label" for="curso-area">Área de Formação *</label>
+                            <input type="text" id="curso-area" name="area" class="form-control" 
+                                   placeholder="Ex: Tecnologia" maxlength="100" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="curso-modalidade">Modalidade *</label>
+                            <select id="curso-modalidade" name="modalidade" class="form-control" required>
+                                <option value="">Selecione a modalidade</option>
+                                <option value="presencial">Presencial</option>
+                                <option value="online">Online</option>
+                            </select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="curso-imagem-url">URL da Imagem</label>
+                        <input type="url" id="curso-imagem-url" name="imagem_url" class="form-control" 
+                               placeholder="https://exemplo.com/imagem.jpg">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <input type="checkbox" id="curso-ativo" name="ativo" value="1" checked style="margin-right: 8px;">
+                            Curso ativo
+                        </label>
+                    </div>
+                    
+                    <div class="flex-between mt-3">
+                        <button type="button" class="btn btn-secondary" onclick="fecharModalCurso()">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success" id="btn-salvar-curso">
+                            <i class="fas fa-save"></i> Salvar Curso
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmação Delete -->
+    <div id="modal-delete-curso" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Confirmar Exclusão
+                </h2>
+                <button class="modal-close" onclick="fecharModalDelete()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="text-center mb-2">
+                    <i class="fas fa-trash-alt" style="font-size: 3rem; color: var(--danger-color); opacity: 0.7;"></i>
+                </div>
+                
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Esta ação é irreversível! Todos os dados do curso serão perdidos permanentemente.
+                </div>
+                
+                <div style="background: #f8fafc; border-radius: 10px; padding: 15px; margin-bottom: 25px;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 10px;">
+                        <i class="fas fa-book"></i> Curso a ser excluído:
+                    </h4>
+                    <div id="delete-curso-info"></div>
+                </div>
+                
+                <div class="flex-between">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalDelete()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-danger" id="btn-confirmar-delete">
+                        <i class="fas fa-trash"></i> Excluir Curso
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script>
+        // Variáveis globais
+        let cursos = [];
+        let centros = [];
+        let cursoEdicao = null;
+        let cursoDelete = null;
+        let ordemCrescente = true;
+        let campoOrdem = 'nome';
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarCentros();
+            carregarCursos();
+            configurarFiltros();
+        });
+
+        // Carregar centros para o select
+        async function carregarCentros() {
+            try {
+                centros = await app.makeRequest(`${APP_CONFIG.API_BASE}/centros`);
+                
+                const selectCentro = document.getElementById('curso-centro-id');
+                const filtroCentro = document.getElementById('filtro-centro');
+                
+                selectCentro.innerHTML = '<option value="">Selecione um centro</option>';
+                filtroCentro.innerHTML = '<option value="">Todos os centros</option>';
+                
+                centros.forEach(centro => {
+                    const option = `<option value="${centro.id}">${centro.nome}</option>`;
+                    selectCentro.innerHTML += option;
+                    filtroCentro.innerHTML += option;
+                });
+                
+            } catch (error) {
+                console.error('Erro ao carregar centros:', error);
+                app.showAlert('danger', 'Erro ao carregar centros');
+            }
+        }
+
+        // Carregar cursos
+        async function carregarCursos() {
+            try {
+                cursos = await app.makeRequest(`${APP_CONFIG.API_BASE}/cursos`);
+                
+                atualizarEstatisticas();
+                aplicarFiltros();
+                preencherFiltroAreas();
+                
+            } catch (error) {
+                console.error('Erro ao carregar cursos:', error);
+                app.showAlert('danger', 'Erro ao carregar cursos');
+                document.getElementById('empty-state').style.display = 'block';
+            }
+        }
+
+        // Atualizar estatísticas
+        function atualizarEstatisticas() {
+            const totalCursos = cursos.length;
+            const cursosAtivos = cursos.filter(c => c.ativo).length;
+            const areas = [...new Set(cursos.map(c => c.area))].length;
+            const precoMedio = cursos.length > 0 
+                ? cursos.reduce((sum, c) => sum + parseFloat(c.preco || 0), 0) / cursos.length 
+                : 0;
+
+            document.getElementById('total-cursos').textContent = totalCursos;
+            document.getElementById('cursos-ativos').textContent = cursosAtivos;
+            document.getElementById('areas-diferentes').textContent = areas;
+            document.getElementById('preco-medio').textContent = app.formatCurrency(precoMedio);
+        }
+
+        // Preencher filtro de áreas
+        function preencherFiltroAreas() {
+            const areas = [...new Set(cursos.map(c => c.area).filter(a => a))];
+            const filtroArea = document.getElementById('filtro-area');
+            
+            filtroArea.innerHTML = '<option value="">Todas as áreas</option>';
+            areas.forEach(area => {
+                filtroArea.innerHTML += `<option value="${area}">${area}</option>`;
+            });
+        }
+
+        // Configurar filtros
+        function configurarFiltros() {
+            const filtros = ['busca-curso', 'filtro-centro', 'filtro-area', 'filtro-modalidade', 'filtro-status'];
+            
+            filtros.forEach(filtroId => {
+                const elemento = document.getElementById(filtroId);
+                if (elemento) {
+                    elemento.addEventListener('input', aplicarFiltros);
+                    elemento.addEventListener('change', aplicarFiltros);
+                }
+            });
+
+            document.getElementById('ordernar-por').addEventListener('change', function() {
+                campoOrdem = this.value;
+                aplicarFiltros();
+            });
+        }
+
+        // Aplicar filtros
+        function aplicarFiltros() {
+            const busca = document.getElementById('busca-curso').value.toLowerCase();
+            const centroPalavra = document.getElementById('filtro-centro').value;
+            const area = document.getElementById('filtro-area').value.toLowerCase();
+            const modalidade = document.getElementById('filtro-modalidade').value.toLowerCase();
+            const status = document.getElementById('filtro-status').value;
+
+            let cursosFiltrados = cursos.filter(curso => {
+                const matchBusca = !busca || curso.nome.toLowerCase().includes(busca);
+                const matchCentro = !centroPalavra || curso.centro_id == centroPalavra;
+                const matchArea = !area || (curso.area && curso.area.toLowerCase().includes(area));
+                const matchModalidade = !modalidade || (curso.modalidade && curso.modalidade.toLowerCase() === modalidade);
+                const matchStatus = status === '' || curso.ativo == status;
+
+                return matchBusca && matchCentro && matchArea && matchModalidade && matchStatus;
+            });
+
+            // Ordenar
+            cursosFiltrados.sort((a, b) => {
+                let valorA = a[campoOrdem] || '';
+                let valorB = b[campoOrdem] || '';
+
+                if (campoOrdem === 'preco' || campoOrdem === 'duracao') {
+                    valorA = parseFloat(valorA) || 0;
+                    valorB = parseFloat(valorB) || 0;
+                } else {
+                    valorA = valorA.toString().toLowerCase();
+                    valorB = valorB.toString().toLowerCase();
+                }
+
+                if (ordemCrescente) {
+                    return valorA > valorB ? 1 : -1;
+                } else {
+                    return valorA < valorB ? 1 : -1;
+                }
+            });
+
+            renderizarCursos(cursosFiltrados);
+        }
+
+        // Renderizar cursos
+        function renderizarCursos(cursosParaRender) {
+            const container = document.getElementById('lista-cursos');
+            const emptyState = document.getElementById('empty-state');
+
+            if (cursosParaRender.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'grid';
+            emptyState.style.display = 'none';
+
+            container.innerHTML = cursosParaRender.map(curso => {
+                const centro = centros.find(c => c.id == curso.centro_id);
+                const centroNome = centro ? centro.nome : 'Centro não encontrado';
+
+                return `
+                    <div class="curso-card">
+                        <div class="curso-header">
+                            <div>
+                                <div class="curso-title">${curso.nome}</div>
+                                <div class="curso-centro">
+                                    <i class="fas fa-building"></i>
+                                    ${centroNome}
+                                </div>
+                            </div>
+                            <div class="curso-status ${curso.ativo ? 'status-ativo' : 'status-inativo'}">
+                                ${curso.ativo ? 'Ativo' : 'Inativo'}
+                            </div>
+                        </div>
+
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="fas fa-tag"></i>
+                                <span>${curso.area || 'Não informado'}</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>${curso.duracao}h</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span class="price-display">${app.formatCurrency(curso.preco)}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="modalidade-tag modalidade-${curso.modalidade}">
+                                    <i class="fas fa-${curso.modalidade === 'online' ? 'laptop' : 'chalkboard-teacher'}"></i>
+                                    ${curso.modalidade}
+                                </span>
+                            </div>
+                        </div>
+
+                        ${curso.descricao ? `
+                            <div class="curso-descricao">
+                                ${curso.descricao}
+                            </div>
+                        ` : ''}
+
+                        <div class="curso-actions">
+                            <button class="btn btn-primary btn-sm" onclick="visualizarCurso(${curso.id})">
+                                <i class="fas fa-eye"></i> Ver Detalhes
+                            </button>
+                            <button class="btn btn-warning btn-sm" onclick="editarCurso(${curso.id})">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="confirmarDeleteCurso(${curso.id})">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Funções de modal
+        function abrirModalCurso(curso = null) {
+            cursoEdicao = curso;
+            const modal = document.getElementById('modal-curso');
+            const title = document.getElementById('modal-curso-title');
+            const form = document.getElementById('form-curso');
+            
+            // Limpar formulário
+            form.reset();
+            app.clearFormErrors(form);
+            
+            if (curso) {
+                title.innerHTML = '<i class="fas fa-edit"></i> Editar Curso';
+                form.setAttribute('data-method', 'PUT');
+                form.setAttribute('data-url', `${APP_CONFIG.API_BASE}/cursos/${curso.id}`);
+                
+                // Preencher campos
+                document.getElementById('curso-centro-id').value = curso.centro_id || '';
+                document.getElementById('curso-nome').value = curso.nome || '';
+                document.getElementById('curso-descricao').value = curso.descricao || '';
+                document.getElementById('curso-programa').value = curso.programa || '';
+                document.getElementById('curso-duracao').value = curso.duracao || '';
+                document.getElementById('curso-preco').value = curso.preco || '';
+                document.getElementById('curso-area').value = curso.area || '';
+                document.getElementById('curso-modalidade').value = curso.modalidade || '';
+                document.getElementById('curso-imagem-url').value = curso.imagem_url || '';
+                document.getElementById('curso-ativo').checked = curso.ativo;
+                
+            } else {
+                title.innerHTML = '<i class="fas fa-plus"></i> Novo Curso';
+                form.setAttribute('data-method', 'POST');
+                form.setAttribute('data-url', `${APP_CONFIG.API_BASE}/cursos`);
+                document.getElementById('curso-ativo').checked = true;
+            }
+            
+            openModal('modal-curso');
+        }
+
+        function fecharModalCurso() {
+            closeModal('modal-curso');
+            cursoEdicao = null;
+        }
+
+        // Funções auxiliares para modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('show');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('show');
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+                
+                // Limpar formulário se existir
+                const form = modal.querySelector('form');
+                if (form) {
+                    form.reset();
+                    app.clearFormErrors(form);
+                }
+            }
+        }
+
+        // Funções CRUD
+        function editarCurso(id) {
+            const curso = cursos.find(c => c.id == id);
+            if (curso) {
+                abrirModalCurso(curso);
+            }
+        }
+
+        function visualizarCurso(id) {
+            const curso = cursos.find(c => c.id == id);
+            const centro = centros.find(c => c.id == curso.centro_id);
+            
+            if (curso) {
+                const modalContent = `
+                    <div style="max-width: 600px;">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-book"></i>
+                                    ${curso.nome}
+                                </div>
+                            </div>
+                            <div style="padding: 20px;">
+                                <div style="margin-bottom: 20px;">
+                                    <strong>Centro:</strong> ${centro ? centro.nome : 'Não encontrado'}
+                                </div>
+                                
+                                ${curso.descricao ? `
+                                    <div style="margin-bottom: 20px;">
+                                        <strong>Descrição:</strong><br>
+                                        ${curso.descricao}
+                                    </div>
+                                ` : ''}
+                                
+                                ${curso.programa ? `
+                                    <div style="margin-bottom: 20px;">
+                                        <strong>Programa:</strong><br>
+                                        <pre style="white-space: pre-wrap; font-family: inherit;">${curso.programa}</pre>
+                                    </div>
+                                ` : ''}
+                                
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                                    <div><strong>Área:</strong> ${curso.area}</div>
+                                    <div><strong>Duração:</strong> ${curso.duracao} horas</div>
+                                    <div><strong>Preço:</strong> ${app.formatCurrency(curso.preco)}</div>
+                                    <div><strong>Modalidade:</strong> ${curso.modalidade}</div>
+                                </div>
+                                
+                                <div style="text-align: center;">
+                                <button class="btn btn-secondary" onclick="closeModal('modal-info')">
+                                <i class="fas fa-times"></i> Fechar
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Criar modal dinamicamente
+                const modalHtml = `
+                    <div id="modal-info" class="modal" style="display: flex; align-items: center; justify-content: center;">
+                        <div class="modal-content">
+                            ${modalContent}
+                        </div>
+                    </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+                setTimeout(() => {
+                    document.getElementById('modal-info').addEventListener('click', (e) => {
+                        if (e.target.id === 'modal-info') {
+                            closeModal('modal-info');
+                            setTimeout(() => document.getElementById('modal-info').remove(), 300);
+                        }
+                    });
+                }, 100);
+            }
+        }
+
+        function confirmarDeleteCurso(id) {
+            const curso = cursos.find(c => c.id == id);
+            const centro = centros.find(c => c.id == curso.centro_id);
+            
+            if (curso) {
+                cursoDelete = curso;
+                
+                document.getElementById('delete-curso-info').innerHTML = `
+                    <div><strong>Nome:</strong> ${curso.nome}</div>
+                    <div><strong>Centro:</strong> ${centro ? centro.nome : 'Não encontrado'}</div>
+                    <div><strong>Área:</strong> ${curso.area}</div>
+                    <div><strong>Preço:</strong> ${app.formatCurrency(curso.preco)}</div>
+                `;
+                
+                openModal('modal-delete-curso');
+            }
+        }
+
+        function fecharModalDelete() {
+            closeModal('modal-delete-curso');
+            cursoDelete = null;
+        }
+
+        // Event listeners
+        document.getElementById('btn-confirmar-delete').addEventListener('click', async function() {
+            if (!cursoDelete) return;
+            
+            const btn = this;
+            const originalText = btn.innerHTML;
+            
+            try {
+                app.setButtonLoading(btn, true);
+                
+                await app.makeRequest(`${APP_CONFIG.API_BASE}/cursos/${cursoDelete.id}`, 'DELETE');
+                
+                app.showAlert('success', 'Curso excluído com sucesso!');
+                fecharModalDelete();
+                carregarCursos();
+                
+            } catch (error) {
+                app.showAlert('danger', 'Erro ao excluir curso');
+            } finally {
+                app.setButtonLoading(btn, false, originalText);
+            }
+        });
+
+        // Formulário de curso
+        document.getElementById('form-curso').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const method = this.getAttribute('data-method');
+            const url = this.getAttribute('data-url');
+            
+            // Converter checkbox para valor correto
+            formData.set('ativo', document.getElementById('curso-ativo').checked ? '1' : '0');
+            
+            try {
+                await app.makeRequest(url, method, formData);
+                app.showAlert('success', `Curso ${method === 'POST' ? 'cadastrado' : 'atualizado'} com sucesso!`);
+                fecharModalCurso();
+                carregarCursos();
+                
+            } catch (error) {
+                if (error.errors) {
+                    app.showFormErrors(this, error.errors);
+                } else {
+                    app.showAlert('danger', 'Erro ao salvar curso');
+                }
+            }
+        });
+
+        // Funções auxiliares
+        function limparFiltros() {
+            document.getElementById('busca-curso').value = '';
+            document.getElementById('filtro-centro').value = '';
+            document.getElementById('filtro-area').value = '';
+            document.getElementById('filtro-modalidade').value = '';
+            document.getElementById('filtro-status').value = '';
+            aplicarFiltros();
+        }
+
+        function alterarOrdem() {
+            ordemCrescente = !ordemCrescente;
+            const btn = document.getElementById('ordem-direcao');
+            btn.innerHTML = ordemCrescente 
+                ? '<i class="fas fa-sort-alpha-up"></i>' 
+                : '<i class="fas fa-sort-alpha-down"></i>';
+            aplicarFiltros();
+        }
+
+        function exportarCursos() {
+            if (cursos.length === 0) {
+                app.showAlert('warning', 'Não há cursos para exportar');
+                return;
+            }
+            
+            const dadosExport = cursos.map(curso => {
+                const centro = centros.find(c => c.id == curso.centro_id);
+                return {
+                    id: curso.id,
+                    nome: curso.nome,
+                    centro: centro ? centro.nome : 'Não encontrado',
+                    area: curso.area,
+                    modalidade: curso.modalidade,
+                    duracao: curso.duracao,
+                    preco: curso.preco,
+                    ativo: curso.ativo ? 'Sim' : 'Não',
+                    descricao: curso.descricao
+                };
+            });
+            
+            app.exportData(dadosExport, 'cursos_' + new Date().toISOString().split('T')[0], 'csv');
+        }
+
+        // Disponibilizar funções globalmente
+        window.loadData = carregarCursos;
+    </script>
+</body>
+</html>

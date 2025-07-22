@@ -22,8 +22,22 @@ class Curso extends Model
         'ativo'
     ];
 
+
+    // Um curso pertence a um centro
     public function centro()
     {
         return $this->belongsTo(Centro::class);
+    }
+
+    // Um curso tem muitos horários
+    public function horarios()
+    {
+        return $this->hasMany(Horario::class);
+    }
+
+    // N:N com formadores
+    public function formadores()
+    {
+        return $this->belongsToMany(Formador::class, 'curso_formador')->withTimestamps();
     }
 }

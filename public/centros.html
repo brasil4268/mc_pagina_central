@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestão de Centros de Formação</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <title>Gestão de Centros - EduGest</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  
   <style>
     * {
       margin: 0;
@@ -771,48 +782,94 @@
   </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <i class="fas fa-graduation-cap"></i>
+      <span>EduGest</span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">
+        <i class="fas fa-home"></i>
+        Início
+      </a>
+      <a href="centros.html" class="nav-link active">
+        <i class="fas fa-building"></i>
+        Centros
+      </a>
+      <a href="cursos.html" class="nav-link">
+      <i class="fas fa-book"></i>
+      Cursos
+      </a>
+      <a href="formadores.html" class="nav-link">
+      <i class="fas fa-chalkboard-teacher"></i>
+      Formadores
+      </a>
+            <a href="horarios.html" class="nav-link">
+                <i class="fas fa-clock"></i>
+                Horários
+            </a>
+            <a href="dashboard.html" class="nav-link">
+                <i class="fas fa-chart-dashboard"></i>
+                Dashboard
+            </a>
+      <button id="theme-toggle" class="btn btn-outline btn-sm">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
   <div class="container">
-    <div class="header">
-      <h1><i class="fas fa-building"></i> Gestão de Centros</h1>
-      <p>Sistema completo de gestão de centros de formação</p>
+    <!-- Header -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon">
+            <i class="fas fa-building"></i>
+          </div>
+          Gestão de Centros
+        </div>
+      </div>
+      <p style="color: #666; margin: 0;">
+        Sistema completo de gestão de centros de formação
+      </p>
     </div>
 
-    <div class="content">
-      <!-- Estatísticas -->
-      <div class="stats">
-        <div class="stat-card">
-          <h3 id="total-centros">0</h3>
-          <p>Total de Centros</p>
-        </div>
+    <!-- Estatísticas -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="total-centros">0</div>
+        <div class="stat-label">Total de Centros</div>
       </div>
+    </div>
 
-      <!-- Controles -->
-      <div class="controls">
-        <div class="search-container">
-          <i class="fas fa-search search-icon"></i>
-          <input type="text" id="busca" class="search-input" placeholder="Buscar por nome ou localização...">
-        </div>
-        <button class="btn btn-primary" onclick="abrirModal('criar')">
-          <i class="fas fa-plus"></i> Novo Centro
-        </button>
+    <!-- Controles -->
+    <div class="flex-between mb-3">
+      <div class="input-group" style="max-width: 400px;">
+        <input type="text" id="busca" class="form-control" placeholder="Buscar por nome ou localização...">
+        <i class="fas fa-search input-group-icon"></i>
       </div>
+      <button class="btn btn-primary" onclick="abrirModal('criar')">
+        <i class="fas fa-plus"></i> Novo Centro
+      </button>
+    </div>
 
-      <!-- Tabela -->
-      <div class="table-container">
-        <table class="table" id="tabela-centros">
-          <thead>
-            <tr>
-              <th><i class="fas fa-hashtag"></i> ID</th>
-              <th><i class="fas fa-building"></i> Nome</th>
-              <th><i class="fas fa-map-marker-alt"></i> Localização</th>
-              <th><i class="fas fa-phone"></i> Contactos</th>
-              <th><i class="fas fa-envelope"></i> Email</th>
-              <th><i class="fas fa-cogs"></i> Ações</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+    <!-- Tabela -->
+    <div class="table-container">
+      <table class="table" id="tabela-centros">
+        <thead>
+          <tr>
+            <th><i class="fas fa-hashtag"></i> ID</th>
+            <th><i class="fas fa-building"></i> Nome</th>
+            <th><i class="fas fa-map-marker-alt"></i> Localização</th>
+            <th><i class="fas fa-phone"></i> Contactos</th>
+            <th><i class="fas fa-envelope"></i> Email</th>
+            <th><i class="fas fa-cogs"></i> Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
   </div>
 
@@ -935,31 +992,19 @@
     </div>
   </div>
 
+  <script src="js/app.js"></script>
   <script>
     let centros = [];
     let centroEdicao = null;
-    const API_BASE = 'http://127.0.0.1:8000/api';
 
-    // Utilitários
+    // Utilitários - usando app.showAlert global
     function mostrarAlert(tipo, mensagem) {
-      const container = document.getElementById('alert-container');
-      container.innerHTML = `
-        <div class="alert alert-${tipo}">
-          <i class="fas fa-${tipo === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-          ${mensagem}
-        </div>
-      `;
-      setTimeout(() => container.innerHTML = '', 5000);
+      app.showAlert(tipo, mensagem);
     }
 
+    // Usando app.setButtonLoading global
     function toggleLoading(elemento, loading) {
-      if (loading) {
-        elemento.disabled = true;
-        elemento.innerHTML = '<span class="loading"></span> Carregando...';
-      } else {
-        elemento.disabled = false;
-        elemento.innerHTML = elemento.dataset.originalText || elemento.innerHTML;
-      }
+      app.setButtonLoading(elemento, loading, elemento.dataset.originalText);
     }
 
     function limparValidacao() {
@@ -1112,7 +1157,16 @@
         document.getElementById('nome').value = centro.nome;
         document.getElementById('localizacao').value = centro.localizacao;
         document.getElementById('email').value = centro.email || '';
-        preencherContactos(centro.contactos);
+        
+        // Processar contactos antes de preencher
+        let contactosArray = [];
+        if (typeof centro.contactos === 'string') {
+          contactosArray = centro.contactos.split(',').map(c => c.trim()).filter(c => c);
+        } else if (Array.isArray(centro.contactos)) {
+          contactosArray = centro.contactos;
+        }
+        
+        preencherContactos(contactosArray.length > 0 ? contactosArray : ['']);
       }
       
       modal.style.display = 'block';
@@ -1148,7 +1202,15 @@
       dados.forEach(centro => {
         const tr = document.createElement('tr');
         
-        const contactosHtml = centro.contactos.map(contacto => 
+        // Processar contactos (pode ser string ou array)
+        let contactosArray = [];
+        if (typeof centro.contactos === 'string') {
+          contactosArray = centro.contactos.split(',').map(c => c.trim()).filter(c => c);
+        } else if (Array.isArray(centro.contactos)) {
+          contactosArray = centro.contactos;
+        }
+        
+        const contactosHtml = contactosArray.map(contacto => 
           `<span class="contacto-tag"><i class="fas fa-phone"></i> ${contacto}</span>`
         ).join('');
         
@@ -1189,61 +1251,55 @@
     // API
     async function carregarCentros() {
       try {
-        const res = await fetch(`${API_BASE}/centros`);
-        const json = await res.json();
-        
-        if (json.status === 'sucesso') {
-          centros = json.dados;
-          renderTabela(centros);
-          atualizarEstatisticas();
-        }
+        centros = await app.makeRequest(`${APP_CONFIG.API_BASE}/centros`);
+        renderTabela(centros);
+        atualizarEstatisticas();
       } catch (error) {
         console.error('Erro ao carregar centros:', error);
-        mostrarAlert('danger', 'Erro ao carregar centros. Verifique a conexão.');
+        app.showAlert('danger', error.message || 'Erro ao carregar centros');
+        // Mostrar tabela vazia em caso de erro
+        renderTabela([]);
       }
     }
 
     async function salvarCentro(dados) {
       const btnSubmit = document.getElementById('btn-submit');
-      btnSubmit.dataset.originalText = btnSubmit.innerHTML;
-      toggleLoading(btnSubmit, true);
+      const originalText = btnSubmit.innerHTML;
+      app.setButtonLoading(btnSubmit, true);
       
       try {
-        const url = centroEdicao ? `${API_BASE}/centros/${centroEdicao.id}` : `${API_BASE}/centros`;
+        const url = centroEdicao ? `${APP_CONFIG.API_BASE}/centros/${centroEdicao.id}` : `${APP_CONFIG.API_BASE}/centros`;
         const method = centroEdicao ? 'PUT' : 'POST';
         
-        const res = await fetch(url, {
-          method,
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(dados)
-        });
-
-        const resultado = await res.json();
+        await app.makeRequest(url, method, dados);
         
-        if (res.ok && resultado.status === 'sucesso') {
-          mostrarAlert('success', resultado.mensagem);
-          setTimeout(() => {
-            fecharModal();
-            carregarCentros();
-          }, 1500);
-        } else {
-          if (resultado.errors) {
-            const mensagens = Object.entries(resultado.errors).map(([campo, erros]) => 
-              `${campo}: ${erros.join(', ')}`
-            ).join('\n');
-            mostrarAlert('danger', `Erros de validação:\n${mensagens}`);
-          } else {
-            mostrarAlert('danger', resultado.mensagem || 'Erro ao salvar centro');
-          }
-        }
+        app.showAlert('success', `Centro ${centroEdicao ? 'atualizado' : 'criado'} com sucesso!`);
+        setTimeout(() => {
+          fecharModal();
+          carregarCentros();
+        }, 1500);
+        
       } catch (error) {
-        console.error('Erro de rede:', error);
-        mostrarAlert('danger', 'Erro de conexão. Verifique se o servidor está rodando.');
+        console.error('Erro ao salvar:', error);
+        
+        if (error.errors) {
+          // Mostrar erros de validação
+          Object.keys(error.errors).forEach(campo => {
+            const input = document.getElementById(campo);
+            if (input) {
+              input.classList.add('is-invalid');
+              const feedback = input.nextElementSibling;
+              if (feedback && feedback.classList.contains('invalid-feedback')) {
+                feedback.textContent = error.errors[campo][0];
+                feedback.style.display = 'block';
+              }
+            }
+          });
+        } else {
+          app.showAlert('danger', error.message || 'Erro ao salvar centro');
+        }
       } finally {
-        toggleLoading(btnSubmit, false);
+        app.setButtonLoading(btnSubmit, false, originalText);
       }
     }
 
@@ -1266,7 +1322,14 @@
       
       // Preencher contactos
       const contactosContainer = document.getElementById('delete-contactos');
-      const contactosHtml = centro.contactos.map(contacto => 
+      let contactosArray = [];
+      if (typeof centro.contactos === 'string') {
+        contactosArray = centro.contactos.split(',').map(c => c.trim()).filter(c => c);
+      } else if (Array.isArray(centro.contactos)) {
+        contactosArray = centro.contactos;
+      }
+      
+      const contactosHtml = contactosArray.map(contacto => 
         `<span class="contacto-tag" style="margin: 2px;"><i class="fas fa-phone"></i> ${contacto}</span>`
       ).join('');
       contactosContainer.innerHTML = contactosHtml;
@@ -1294,26 +1357,15 @@
       btnText.innerHTML = '<span class="loading"></span> Eliminando...';
       
       try {
-        const res = await fetch(`${API_BASE}/centros/${id}`, {
-          method: 'DELETE',
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        const resultado = await res.json();
+        await app.makeRequest(`${APP_CONFIG.API_BASE}/centros/${id}`, 'DELETE');
         
-        if (res.ok && resultado.status === 'sucesso') {
-          // Fechar modal e mostrar sucesso
-          fecharModalDelete();
-          mostrarAlert('success', `✅ ${resultado.mensagem}`);
-          carregarCentros();
-        } else {
-          mostrarAlert('danger', resultado.mensagem || 'Erro ao deletar centro');
-        }
+        fecharModalDelete();
+        app.showAlert('success', 'Centro eliminado com sucesso!');
+        carregarCentros();
+        
       } catch (error) {
         console.error('Erro ao deletar:', error);
-        mostrarAlert('danger', 'Erro de conexão ao deletar centro');
+        app.showAlert('danger', error.message || 'Erro ao eliminar centro');
       } finally {
         // Restaurar botão
         btnConfirmar.disabled = false;
@@ -1324,12 +1376,20 @@
     // Busca
     function buscarCentros(texto) {
       const filtro = texto.toLowerCase();
-      const filtrados = centros.filter(c =>
-        c.nome.toLowerCase().includes(filtro) ||
-        c.localizacao.toLowerCase().includes(filtro) ||
-        c.contactos.some(contacto => contacto.includes(filtro)) ||
-        (c.email && c.email.toLowerCase().includes(filtro))
-      );
+      const filtrados = centros.filter(c => {
+        // Processar contactos para busca
+        let contactosString = '';
+        if (typeof c.contactos === 'string') {
+          contactosString = c.contactos;
+        } else if (Array.isArray(c.contactos)) {
+          contactosString = c.contactos.join(' ');
+        }
+        
+        return c.nome.toLowerCase().includes(filtro) ||
+               c.localizacao.toLowerCase().includes(filtro) ||
+               contactosString.includes(filtro) ||
+               (c.email && c.email.toLowerCase().includes(filtro));
+      });
       renderTabela(filtrados);
     }
 

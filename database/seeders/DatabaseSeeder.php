@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CentroSeeder::class,
             CursoSeeder::class,
+            HorarioSeeder::class,
+            FormadorSeeder::class,
         ]); 
     }
 };

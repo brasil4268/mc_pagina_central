@@ -42,3 +42,21 @@ Route::post('/cursos', [CursoController::class, 'store']);
 Route::get('/cursos/{id}', [CursoController::class, 'show']);
 Route::put('/cursos/{id}', [CursoController::class, 'update']);
 Route::delete('/cursos/{id}', [CursoController::class, 'destroy']);
+
+//ROTAS PARA HORÁRIOS
+use App\Http\Controllers\Api\HorarioController;
+
+Route::get('/horarios', [HorarioController::class, 'index']);
+Route::post('/horarios', [HorarioController::class, 'store']);
+Route::get('/horarios/{id}', [HorarioController::class, 'show']);
+Route::put('/horarios/{id}', [HorarioController::class, 'update']);
+Route::delete('/horarios/{id}', [HorarioController::class, 'destroy']);
+
+//ROTAS PARA FORMADORES
+use App\Http\Controllers\Api\FormadorController;
+
+Route::get('/formadores', [FormadorController::class, 'index']);
+Route::post('/formadores', [FormadorController::class, 'store']);
+Route::get('/formadores/{id}', [FormadorController::class, 'show']);
+Route::put('/formadores/{id}', [FormadorController::class, 'update']);
+Route::delete('/formadores/{id}', [FormadorController::class, 'destroy']);

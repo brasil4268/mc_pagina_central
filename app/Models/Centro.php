@@ -21,4 +21,16 @@ class Centro extends Model
     protected $casts = [
         'contactos' => 'array',
     ];
+
+    // Um centro tem muitos cursos
+    public function cursos()
+    {
+        return $this->hasMany(Curso::class);
+    }
+
+    // N:N com formadores
+    public function formadores()
+    {
+        return $this->belongsToMany(Formador::class, 'centro_formador')->withTimestamps();
+    }
 }
