@@ -40,4 +40,9 @@ class Curso extends Model
     {
         return $this->belongsToMany(Formador::class, 'curso_formador')->withTimestamps();
     }
+    // Um curso pode ter muitas pré-inscrições
+    public function preInscricoes()
+    {
+        return $this->hasMany(PreInscricao::class);
+    }
 }

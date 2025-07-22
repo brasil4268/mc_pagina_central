@@ -1,14 +1,1 @@
-GET http://127.0.0.1:8000/api/formadores/2
-Content-Type: application/json
-Accept: application/json
-
-{
-  "nome": "Osvaldo Cazola",
-  "email": "osvaldo@formador.com",
-  "contactos": ["952456789", "945121312"],
-  "especialidade": "Informática",
-  "bio": "Formadora experiente em gestão.",
-  "foto_url": null,
-  "cursos": [1, 2],
-  "centros": [1]
-}
+GET http://localhost:8000/api/pre-inscricoes

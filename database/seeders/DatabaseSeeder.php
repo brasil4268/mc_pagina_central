@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CursoSeeder::class,
             HorarioSeeder::class,
             FormadorSeeder::class,
+            PreInscricaoSeeder::class, 
         ]); 
     }
 };

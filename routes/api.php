@@ -60,3 +60,13 @@ Route::post('/formadores', [FormadorController::class, 'store']);
 Route::get('/formadores/{id}', [FormadorController::class, 'show']);
 Route::put('/formadores/{id}', [FormadorController::class, 'update']);
 Route::delete('/formadores/{id}', [FormadorController::class, 'destroy']);
+
+
+//ROTAS PARA PRE_INSCRIÇÕES
+use App\Http\Controllers\Api\PreInscricaoController;
+
+Route::post('/pre-inscricoes', [PreInscricaoController::class, 'store']); // Usuário
+Route::get('/pre-inscricoes', [PreInscricaoController::class, 'index']); // Admin
+Route::put('/pre-inscricoes/{id}', [PreInscricaoController::class, 'update']); // Admin
+Route::get('/pre-inscricoes/{id}', [PreInscricaoController::class, 'show']);
+Route::delete('/pre-inscricoes/{id}', [PreInscricaoController::class, 'destroy']);

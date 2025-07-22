@@ -22,4 +22,10 @@ class Horario extends Model
     {
         return $this->belongsTo(Curso::class);
     }
+
+    // Um horário pode ter muitas pré-inscrições
+    public function preInscricoes()
+    {
+        return $this->hasMany(PreInscricao::class);
+    }
 }
