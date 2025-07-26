@@ -22,12 +22,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CentroSeeder::class,
             CursoSeeder::class,
-            HorarioSeeder::class,
             FormadorSeeder::class,
-            PreInscricaoSeeder::class, 
-            CursoFormadorSeeder::class,
-            CentroFormadorSeeder::class,
+            HorarioSeeder::class,
             CentroCursoSeeder::class, 
+            CentroFormadorSeeder::class,
+            CursoFormadorSeeder::class,
+            PreInscricaoSeeder::class,   // Por último porque depende de todos
         ]); 
     }
 };

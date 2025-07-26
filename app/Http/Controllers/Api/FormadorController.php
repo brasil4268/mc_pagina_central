@@ -175,12 +175,16 @@ class FormadorController extends Controller
 
         $validated = $request->validate([
             'nome' => 'required|string|max:100',
-            'email' => 'nullable|email|max:100|unique:formadores,email,' . $id,
+            'email' => 'nullable|email|max:100|unique:formadores,email' . ($request->method() === 'PUT' ? ',' . $id : ''),
             'contactos' => ['required', 'array', 'min:1'],
             'contactos.*' => ['required', 'string', 'regex:/^9\d{8}$/'],
             'especialidade' => 'nullable|string|max:100',
             'bio' => 'nullable|string|max:500',
-            'foto_url' => 'nullable|url|max:255'
+            'foto_url' => 'nullable|url|max:255',
+            'cursos' => 'array',
+            'cursos.*' => 'exists:cursos,id',
+            'centros' => 'array',
+            'centros.*' => 'exists:centros,id'
         ]);
 
         // Formatar contactos para garantir que são strings

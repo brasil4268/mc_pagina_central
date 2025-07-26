@@ -55,6 +55,7 @@ class HorarioController extends Controller
     {
         $validated = $request->validate([
             'curso_id' => 'required|exists:cursos,id',
+            'centro_id' => 'required|exists:centros,id',
             'dia_semana' => 'required|in:Segunda,Terça,Quarta,Quinta,Sexta,Sábado,Domingo',
             'periodo' => 'required|in:manhã,tarde,noite',
             'hora_inicio' => 'required|date_format:H:i',
@@ -155,6 +156,15 @@ class HorarioController extends Controller
  */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'curso_id' => 'required|exists:cursos,id',
+            'centro_id' => 'required|exists:centros,id',
+            'dia_semana' => 'required|in:Segunda,Terça,Quarta,Quinta,Sexta,Sábado,Domingo',
+            'periodo' => 'required|in:manhã,tarde,noite',
+            'hora_inicio' => 'required|date_format:H:i',
+            'hora_fim' => 'required|date_format:H:i|after:hora_inicio'
+        ]);
+        
         $horario = Horario::find($id);
 
         if (!$horario) {

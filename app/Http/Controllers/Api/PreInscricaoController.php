@@ -136,6 +136,16 @@ class PreInscricaoController extends Controller
         }
 
         $validated = $request->validate([
+            'curso_id' => 'required|exists:cursos,id',
+            'centro_id' => 'required|exists:centros,id',
+            'horario_id' => 'nullable|exists:horarios,id',
+            'nome_completo' => 'required|string|max:100',
+            'contactos' => ['required', 'array', 'min:1'],
+            'contactos.*' => ['required', 'string', 'regex:/^9\d{8}$/'],
+            'email' => 'nullable|email|max:100',
+            'observacoes' => 'nullable|string|max:500'
+        ]);
+        $validated = $request->validate([
             'status' => 'required|in:pendente,confirmado,cancelado',
             'observacoes' => 'nullable|string|max:500'
         ]);

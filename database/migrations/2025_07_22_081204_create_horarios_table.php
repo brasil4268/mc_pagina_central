@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
             $table->foreignId('curso_id')->constrained('cursos')->onDelete('cascade');
+            $table->foreignId('centro_id')->constrained('centros')->onDelete('cascade');
             $table->enum('dia_semana', ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']);
             $table->enum('periodo', ['manhã', 'tarde', 'noite']);
             $table->time('hora_inicio')->nullable();   // Hora de início da aula

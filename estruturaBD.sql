@@ -26,6 +26,9 @@ CREATE TABLE `centro_curso` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `centro_id` bigint(20) unsigned NOT NULL,
   `curso_id` bigint(20) unsigned NOT NULL,
+  `preco` decimal(10,2) NOT NULL,
+  `duracao` varchar(255) NOT NULL,
+  `data_arranque` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -50,7 +53,7 @@ CREATE TABLE `centro_formador` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `centro_formador_centro_id_foreign` (`centro_id`),
+  UNIQUE KEY `centro_formador_centro_id_formador_id_unique` (`centro_id`,`formador_id`),
   KEY `centro_formador_formador_id_foreign` (`formador_id`),
   CONSTRAINT `centro_formador_centro_id_foreign` FOREIGN KEY (`centro_id`) REFERENCES `centros` (`id`) ON DELETE CASCADE,
   CONSTRAINT `centro_formador_formador_id_foreign` FOREIGN KEY (`formador_id`) REFERENCES `formadores` (`id`) ON DELETE CASCADE
@@ -74,7 +77,7 @@ CREATE TABLE `centros` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `centros_nome_unique` (`nome`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +94,7 @@ CREATE TABLE `curso_formador` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `curso_formador_curso_id_foreign` (`curso_id`),
+  UNIQUE KEY `curso_formador_curso_id_formador_id_unique` (`curso_id`,`formador_id`),
   KEY `curso_formador_formador_id_foreign` (`formador_id`),
   CONSTRAINT `curso_formador_curso_id_foreign` FOREIGN KEY (`curso_id`) REFERENCES `cursos` (`id`) ON DELETE CASCADE,
   CONSTRAINT `curso_formador_formador_id_foreign` FOREIGN KEY (`formador_id`) REFERENCES `formadores` (`id`) ON DELETE CASCADE
@@ -107,21 +110,16 @@ DROP TABLE IF EXISTS `cursos`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cursos` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `centro_id` bigint(20) unsigned NOT NULL,
   `nome` varchar(100) NOT NULL,
   `descricao` text DEFAULT NULL,
   `programa` text DEFAULT NULL,
-  `duracao` varchar(50) NOT NULL,
-  `preco` decimal(8,2) NOT NULL,
   `area` varchar(100) NOT NULL,
   `modalidade` enum('presencial','online') NOT NULL,
   `imagem_url` varchar(255) DEFAULT NULL,
   `ativo` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cursos_centro_id_foreign` (`centro_id`),
-  CONSTRAINT `cursos_centro_id_foreign` FOREIGN KEY (`centro_id`) REFERENCES `centros` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -177,6 +175,7 @@ DROP TABLE IF EXISTS `horarios`;
 CREATE TABLE `horarios` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `curso_id` bigint(20) unsigned NOT NULL,
+  `centro_id` bigint(20) unsigned NOT NULL,
   `dia_semana` enum('Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo') NOT NULL,
   `periodo` enum('manhã','tarde','noite') NOT NULL,
   `hora_inicio` time DEFAULT NULL,
@@ -185,6 +184,8 @@ CREATE TABLE `horarios` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `horarios_curso_id_foreign` (`curso_id`),
+  KEY `horarios_centro_id_foreign` (`centro_id`),
+  CONSTRAINT `horarios_centro_id_foreign` FOREIGN KEY (`centro_id`) REFERENCES `centros` (`id`) ON DELETE CASCADE,
   CONSTRAINT `horarios_curso_id_foreign` FOREIGN KEY (`curso_id`) REFERENCES `cursos` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -302,4 +303,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-25 10:25:59
+-- Dump completed on 2025-07-26 22:31:36

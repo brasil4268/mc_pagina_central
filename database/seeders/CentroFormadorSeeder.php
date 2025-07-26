@@ -19,10 +19,10 @@ class CentroFormadorSeeder extends Seeder
             ['centro_id' => 1, 'formador_id' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['centro_id' => 2, 'formador_id' => 2, 'created_at' => $now, 'updated_at' => $now],
             ['centro_id' => 3, 'formador_id' => 3, 'created_at' => $now, 'updated_at' => $now],
-            ['centro_id' => 4, 'formador_id' => 4, 'created_at' => $now, 'updated_at' => $now],
-            ['centro_id' => 5, 'formador_id' => 5, 'created_at' => $now, 'updated_at' => $now],
-            ['centro_id' => 6, 'formador_id' => 6, 'created_at' => $now, 'updated_at' => $now],
-            ['centro_id' => 7, 'formador_id' => 7, 'created_at' => $now, 'updated_at' => $now],
+            ['centro_id' => 2, 'formador_id' => 4, 'created_at' => $now, 'updated_at' => $now],
+            ['centro_id' => 2, 'formador_id' => 5, 'created_at' => $now, 'updated_at' => $now],
+            ['centro_id' => 3, 'formador_id' => 6, 'created_at' => $now, 'updated_at' => $now],
+            ['centro_id' => 3, 'formador_id' => 7, 'created_at' => $now, 'updated_at' => $now],
         ]);
     }
 }

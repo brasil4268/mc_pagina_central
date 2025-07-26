@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('centro_id')->constrained('centros')->onDelete('cascade');
             $table->foreignId('formador_id')->constrained('formadores')->onDelete('cascade');
             $table->timestamps();
+
+            $table->unique(['centro_id', 'formador_id']);
         });
     }
 

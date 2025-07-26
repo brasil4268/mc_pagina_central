@@ -11,6 +11,7 @@ class Horario extends Model
 
     protected $fillable = [
         'curso_id',
+        'centro_id', 
         'dia_semana',
         'periodo',
         'hora_inicio', 
