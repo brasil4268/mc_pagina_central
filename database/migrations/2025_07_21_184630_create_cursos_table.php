@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('centro_id')->constrained('centros')->onDelete('cascade');
             $table->string('nome', 100);
             $table->text('descricao')->nullable();
             $table->text('programa')->nullable();
-            $table->string('duracao', 50);
-            $table->decimal('preco', 8, 2);
             $table->string('area', 100);
             $table->enum('modalidade', ['presencial', 'online']);
             $table->string('imagem_url')->nullable();

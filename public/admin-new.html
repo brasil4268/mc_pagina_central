@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormAcademy - Painel Administrativo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-modern-styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">FormAcademy</span>
+                    <span class="brand-subtitle">Admin Panel</span>
+                </div>
+            </div>
+            <button class="sidebar-toggle" id="sidebar-toggle">
+                <i class="fas fa-angles-left"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Principal</div>
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="nav-icon fas fa-chart-line"></i>
+                    <span class="nav-text">Dashboard</span>
+                    <div class="nav-indicator"></div>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Gestão</div>
+                <a href="#centros" class="nav-item" data-section="centros">
+                    <i class="nav-icon fas fa-building"></i>
+                    <span class="nav-text">Centros</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#cursos" class="nav-item" data-section="cursos">
+                    <i class="nav-icon fas fa-book-open"></i>
+                    <span class="nav-text">Cursos</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#formadores" class="nav-item" data-section="formadores">
+                    <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                    <span class="nav-text">Formadores</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#horarios" class="nav-item" data-section="horarios">
+                    <i class="nav-icon fas fa-clock"></i>
+                    <span class="nav-text">Horários</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#pre-inscricoes" class="nav-item" data-section="pre-inscricoes">
+                    <i class="nav-icon fas fa-user-plus"></i>
+                    <span class="nav-text">Pré-inscrições</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#calendario" class="nav-item" data-section="calendario">
+                    <i class="nav-icon fas fa-calendar-alt"></i>
+                    <span class="nav-text">Calendário</span>
+                    <div class="nav-indicator"></div>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="index-new.html" class="btn-site">
+                <i class="fas fa-globe"></i>
+                <span>Site Público</span>
+            </a>
+            <div class="admin-info">
+                <div class="admin-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="admin-details">
+                    <span class="admin-name">Administrador</span>
+                    <span class="admin-role">Super Admin</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="page-info">
+                    <h1 class="page-title" id="page-title">Dashboard</h1>
+                    <p class="page-subtitle" id="page-subtitle">Visão geral do sistema</p>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <button class="btn-reload" onclick="reloadAllData()" title="Recarregar dados">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <div class="header-divider"></div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="header-total-courses">0</span>
+                        <span class="stat-label">Cursos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="header-total-registrations">0</span>
+                        <span class="stat-label">Inscrições</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="content-section active">
+            <div class="dashboard-grid">
+                <!-- Statistics Cards -->
+                <div class="stats-row">
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-icon centers-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-centros">0</h3>
+                            <p>Centros</p>
+                            <span class="stat-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                +2 este mês
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-icon courses-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-cursos">0</h3>
+                            <p>Cursos</p>
+                            <span class="stat-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                +5 este mês
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-icon trainers-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-formadores">0</h3>
+                            <p>Formadores</p>
+                            <span class="stat-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                +3 este mês
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-icon registrations-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-pre-inscricoes">0</h3>
+                            <p>Pré-inscrições</p>
+                            <span class="stat-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                +12 hoje
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts Row -->
+                <div class="charts-row">
+                    <div class="chart-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="chart-header">
+                            <h3>Cursos por Centro</h3>
+                            <div class="chart-controls">
+                                <button class="btn-chart-refresh" onclick="refreshChart('courses-by-center')">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-content" id="courses-by-center-chart">
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-bar"></i>
+                                <p>Carregando dados...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="chart-header">
+                            <h3>Pré-inscrições Recentes</h3>
+                            <div class="chart-controls">
+                                <button class="btn-chart-refresh" onclick="refreshChart('recent-registrations')">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-content" id="recent-registrations">
+                            <div class="chart-placeholder">
+                                <i class="fas fa-users"></i>
+                                <p>Carregando dados...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions" data-aos="fade-up" data-aos-delay="700">
+                    <h3>Ações Rápidas</h3>
+                    <div class="actions-grid">
+                        <button class="action-btn" onclick="openCreateModal('centro')">
+                            <i class="fas fa-plus"></i>
+                            <span>Novo Centro</span>
+                        </button>
+                        <button class="action-btn" onclick="openCreateModal('curso')">
+                            <i class="fas fa-plus"></i>
+                            <span>Novo Curso</span>
+                        </button>
+                        <button class="action-btn" onclick="openCreateModal('formador')">
+                            <i class="fas fa-plus"></i>
+                            <span>Novo Formador</span>
+                        </button>
+                        <button class="action-btn" onclick="openCreateModal('horario')">
+                            <i class="fas fa-plus"></i>
+                            <span>Novo Horário</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Centros Section -->
+        <section id="centros-section" class="content-section">
+            <div class="section-header">
+                <div class="section-title-group">
+                    <h2>Gestão de Centros</h2>
+                    <p>Gerencie os centros de formação do sistema</p>
+                </div>
+                <div class="section-actions">
+                    <div class="action-group">
+                        <button class="btn btn-secondary" onclick="exportData('centros', 'csv')">
+                            <i class="fas fa-download"></i>
+                            <span>Exportar CSV</span>
+                        </button>
+                        <button class="btn btn-primary" onclick="openCreateModal('centro')">
+                            <i class="fas fa-plus"></i>
+                            <span>Novo Centro</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-table-wrapper">
+                <div class="table-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar centros..." id="centros-search">
+                    </div>
+                    <div class="table-actions">
+                        <button class="btn-filter" onclick="toggleFilters('centros')">
+                            <i class="fas fa-filter"></i>
+                            Filtros
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <table id="centros-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Localização</th>
+                                <th>Email</th>
+                                <th>Contactos</th>
+                                <th>Cursos</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="table-info">
+                        Mostrando <span id="centros-showing">0</span> de <span id="centros-total">0</span> centros
+                    </div>
+                    <div class="table-pagination" id="centros-pagination">
+                        <!-- Pagination will be generated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cursos Section -->
+        <section id="cursos-section" class="content-section">
+            <div class="section-header">
+                <div class="section-title-group">
+                    <h2>Gestão de Cursos</h2>
+                    <p>Gerencie os cursos disponíveis no sistema</p>
+                </div>
+                <div class="section-actions">
+                    <div class="action-group">
+                        <button class="btn btn-secondary" onclick="exportData('cursos', 'csv')">
+                            <i class="fas fa-download"></i>
+                            <span>Exportar CSV</span>
+                        </button>
+                        <button class="btn btn-primary" onclick="openCreateModal('curso')">
+                            <i class="fas fa-plus"></i>
+                            <span>Novo Curso</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-table-wrapper">
+                <div class="table-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar cursos..." id="cursos-search">
+                    </div>
+                    <div class="table-actions">
+                        <select class="filter-select" id="cursos-center-filter">
+                            <option value="">Todos os Centros</option>
+                        </select>
+                        <select class="filter-select" id="cursos-status-filter">
+                            <option value="">Todos os Status</option>
+                            <option value="1">Ativos</option>
+                            <option value="0">Inativos</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <table id="cursos-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Centro</th>
+                                <th>Área</th>
+                                <th>Duração</th>
+                                <th>Preço</th>
+                                <th>Modalidade</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="table-info">
+                        Mostrando <span id="cursos-showing">0</span> de <span id="cursos-total">0</span> cursos
+                    </div>
+                    <div class="table-pagination" id="cursos-pagination">
+                        <!-- Pagination will be generated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formadores Section -->
+        <section id="formadores-section" class="content-section">
+            <div class="section-header">
+                <div class="section-title-group">
+                    <h2>Gestão de Formadores</h2>
+                    <p>Gerencie os formadores do sistema</p>
+                </div>
+                <div class="section-actions">
+                    <button class="btn btn-primary" onclick="openCreateModal('formador')">
+                        <i class="fas fa-plus"></i>
+                        <span>Novo Formador</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="data-table-wrapper">
+                <div class="table-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar formadores..." id="formadores-search">
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <table id="formadores-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Especialidade</th>
+                                <th>Contactos</th>
+                                <th>Cursos</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="table-info">
+                        Mostrando <span id="formadores-showing">0</span> de <span id="formadores-total">0</span> formadores
+                    </div>
+                    <div class="table-pagination" id="formadores-pagination">
+                        <!-- Pagination will be generated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horários Section -->
+        <section id="horarios-section" class="content-section">
+            <div class="section-header">
+                <div class="section-title-group">
+                    <h2>Gestão de Horários</h2>
+                    <p>Gerencie os horários dos cursos</p>
+                </div>
+                <div class="section-actions">
+                    <button class="btn btn-primary" onclick="openCreateModal('horario')">
+                        <i class="fas fa-plus"></i>
+                        <span>Novo Horário</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="data-table-wrapper">
+                <div class="table-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar horários..." id="horarios-search">
+                    </div>
+                    <div class="table-actions">
+                        <select class="filter-select" id="horarios-course-filter">
+                            <option value="">Todos os Cursos</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <table id="horarios-table">
+                        <thead>
+                            <tr>
+                                <th>Curso</th>
+                                <th>Dia da Semana</th>
+                                <th>Período</th>
+                                <th>Hora Início</th>
+                                <th>Hora Fim</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="table-info">
+                        Mostrando <span id="horarios-showing">0</span> de <span id="horarios-total">0</span> horários
+                    </div>
+                    <div class="table-pagination" id="horarios-pagination">
+                        <!-- Pagination will be generated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pré-inscrições Section -->
+        <section id="pre-inscricoes-section" class="content-section">
+            <div class="section-header">
+                <div class="section-title-group">
+                    <h2>Gestão de Pré-inscrições</h2>
+                    <p>Gerencie as pré-inscrições dos estudantes</p>
+                </div>
+                <div class="section-actions">
+                    <div class="status-filters">
+                        <button class="status-filter active" data-status="">Todas</button>
+                        <button class="status-filter" data-status="pendente">Pendentes</button>
+                        <button class="status-filter" data-status="confirmado">Confirmadas</button>
+                        <button class="status-filter" data-status="cancelado">Canceladas</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-table-wrapper">
+                <div class="table-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar pré-inscrições..." id="pre-inscricoes-search">
+                    </div>
+                    <div class="table-actions">
+                        <select class="filter-select" id="pre-inscricoes-course-filter">
+                            <option value="">Todos os Cursos</option>
+                        </select>
+                        <select class="filter-select" id="pre-inscricoes-center-filter">
+                            <option value="">Todos os Centros</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <table id="pre-inscricoes-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Curso</th>
+                                <th>Centro</th>
+                                <th>Status</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="table-info">
+                        Mostrando <span id="pre-inscricoes-showing">0</span> de <span id="pre-inscricoes-total">0</span> pré-inscrições
+                    </div>
+                    <div class="table-pagination" id="pre-inscricoes-pagination">
+                        <!-- Pagination will be generated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendário Section -->
+        <section id="calendario-section" class="content-section">
+            <div class="section-header">
+                <div class="section-title-group">
+                    <h2>Calendário de Horários</h2>
+                    <p>Visualização em grade dos horários dos cursos</p>
+                </div>
+                <div class="section-actions">
+                    <div class="calendar-controls">
+                        <select id="calendario-centro-filter" class="filter-select">
+                            <option value="">Todos os Centros</option>
+                        </select>
+                        <select id="calendario-curso-filter" class="filter-select">
+                            <option value="">Todos os Cursos</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="refreshCalendar()">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Atualizar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-wrapper">
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Calendar will be generated dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Universal Modal -->
+    <div class="modal" id="universal-modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-title">Modal Title</h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <form id="modal-form" class="modal-form">
+                    <div id="form-fields" class="form-fields">
+                        <!-- Form fields will be generated dynamically -->
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            <span>Salvar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-content">
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+            </div>
+            <div class="loading-text">Processando...</div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-text"></span>
+        </div>
+        <button class="notification-close" onclick="closeNotification()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="admin-improved.js"></script>
+</body>
+</html>

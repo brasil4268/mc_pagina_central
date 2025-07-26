@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Contactos - Frontend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-title {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .test-result {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #007bff;
+        }
+        
+        .success { border-left-color: #28a745; }
+        .error { border-left-color: #dc3545; }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teste de Formatação de Contactos</h1>
+    
+    <div class="test-section">
+        <h2 class="test-title">Teste de Formatação de Contactos</h2>
+        
+        <button onclick="testParseContacts()">Testar parseContacts</button>
+        <button onclick="testFormatContactsDisplay()">Testar formatContactsDisplay</button>
+        <button onclick="testFormatPhoneNumber()">Testar formatPhoneNumber</button>
+        <button onclick="testAllCases()">Testar Todos os Casos</button>
+        
+        <div id="test-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2 class="test-title">Simulação de Dados do Backend</h2>
+        
+        <h3>Formato que vem do backend:</h3>
+        <pre id="backend-format"></pre>
+        
+        <h3>Como deve ser exibido:</h3>
+        <div id="display-format"></div>
+        
+        <button onclick="simulateBackendData()">Simular Dados do Backend</button>
+    </div>
+
+    <script src="js/formatters.js"></script>
+    <script>
+        // Criar AdminUtils para testes (simplificado do admin-modern-script.js)
+        const AdminUtils = {
+            // Parse contacts
+            parseContacts(contacts) {
+                if (Array.isArray(contacts)) {
+                    return contacts.filter(contact => contact && contact.trim());
+                } else if (typeof contacts === 'string') {
+                    try {
+                        const parsed = JSON.parse(contacts);
+                        return Array.isArray(parsed) ? parsed.filter(contact => contact && contact.trim()) : [contacts];
+                    } catch {
+                        return contacts.trim() ? [contacts.trim()] : [];
+                    }
+                } else if (typeof contacts === 'object' && contacts !== null) {
+                    return Object.values(contacts).filter(contact => contact && contact.trim());
+                }
+                return [];
+            },
+
+            // Format contacts for display
+            formatContactsDisplay(contacts) {
+                const contactsArray = this.parseContacts(contacts);
+                if (contactsArray.length === 0) return 'Sem contacto';
+                
+                // Formatar primeiro telefone
+                const firstContact = this.formatPhoneNumber(contactsArray[0]);
+                
+                if (contactsArray.length === 1) {
+                    return firstContact;
+                } else {
+                    return `${firstContact} (+${contactsArray.length - 1})`;
+                }
+            },
+
+            // Format phone number (Angola format: 9XX XXX XXX)
+            formatPhoneNumber(phone) {
+                if (!phone) return '';
+                
+                const cleanPhone = phone.replace(/\D/g, '');
+                
+                if (cleanPhone.length === 9 && cleanPhone.startsWith('9')) {
+                    return `${cleanPhone.slice(0, 3)} ${cleanPhone.slice(3, 6)} ${cleanPhone.slice(6)}`;
+                }
+                
+                return phone;
+            },
+
+            sanitizeHTML(str) {
+                if (!str) return '';
+                const temp = document.createElement('div');
+                temp.textContent = str;
+                return temp.innerHTML;
+            }
+        };
+
+        function addResult(title, result, success = true) {
+            const container = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `test-result ${success ? 'success' : 'error'}`;
+            div.innerHTML = `<strong>${title}:</strong><br><pre>${JSON.stringify(result, null, 2)}</pre>`;
+            container.appendChild(div);
+        }
+
+        function clearResults() {
+            document.getElementById('test-results').innerHTML = '';
+        }
+
+        function testParseContacts() {
+            clearResults();
+            
+            // Casos de teste
+            const testCases = [
+                { input: ["923456789", "924567890"], expected: ["923456789", "924567890"] },
+                { input: '["923456789", "924567890"]', expected: ["923456789", "924567890"] },
+                { input: "923456789", expected: ["923456789"] },
+                { input: { "0": "923456789", "1": "924567890" }, expected: ["923456789", "924567890"] },
+                { input: [], expected: [] },
+                { input: "", expected: [] },
+                { input: null, expected: [] }
+            ];
+
+            testCases.forEach((testCase, index) => {
+                const result = AdminUtils.parseContacts(testCase.input);
+                const success = JSON.stringify(result) === JSON.stringify(testCase.expected);
+                addResult(
+                    `Teste ${index + 1} - Input: ${JSON.stringify(testCase.input)}`,
+                    { result, expected: testCase.expected, success },
+                    success
+                );
+            });
+        }
+
+        function testFormatContactsDisplay() {
+            clearResults();
+            
+            const testCases = [
+                { input: ["923456789"], expected: "923 456 789" },
+                { input: ["923456789", "924567890"], expected: "923 456 789 (+1)" },
+                { input: ["923456789", "924567890", "925678901"], expected: "923 456 789 (+2)" },
+                { input: [], expected: "Sem contacto" },
+                { input: ["9234567890"], expected: "9234567890" }, // Número inválido
+            ];
+
+            testCases.forEach((testCase, index) => {
+                const result = AdminUtils.formatContactsDisplay(testCase.input);
+                const success = result === testCase.expected;
+                addResult(
+                    `Teste ${index + 1} - Input: ${JSON.stringify(testCase.input)}`,
+                    { result, expected: testCase.expected, success },
+                    success
+                );
+            });
+        }
+
+        function testFormatPhoneNumber() {
+            clearResults();
+            
+            const testCases = [
+                { input: "923456789", expected: "923 456 789" },
+                { input: "924567890", expected: "924 567 890" },
+                { input: "9234567890", expected: "9234567890" }, // Muito longo
+                { input: "82345678", expected: "82345678" }, // Não começa com 9
+                { input: "", expected: "" },
+                { input: null, expected: "" }
+            ];
+
+            testCases.forEach((testCase, index) => {
+                const result = AdminUtils.formatPhoneNumber(testCase.input);
+                const success = result === testCase.expected;
+                addResult(
+                    `Teste ${index + 1} - Input: "${testCase.input}"`,
+                    { result, expected: testCase.expected, success },
+                    success
+                );
+            });
+        }
+
+        function testAllCases() {
+            clearResults();
+            testParseContacts();
+            setTimeout(() => testFormatContactsDisplay(), 100);
+            setTimeout(() => testFormatPhoneNumber(), 200);
+        }
+
+        function simulateBackendData() {
+            // Simular dados como viriam do backend
+            const backendData = {
+                centro1: {
+                    nome: "Centro de Formação Luanda",
+                    contactos: ["923456789", "924567890"]
+                },
+                centro2: {
+                    nome: "Centro de Formação Benguela", 
+                    contactos: ["925678901"]
+                },
+                centro3: {
+                    nome: "Centro sem contactos",
+                    contactos: []
+                }
+            };
+
+            document.getElementById('backend-format').textContent = JSON.stringify(backendData, null, 2);
+
+            const displayDiv = document.getElementById('display-format');
+            displayDiv.innerHTML = '';
+
+            Object.values(backendData).forEach(centro => {
+                const displayContact = AdminUtils.formatContactsDisplay(centro.contactos);
+                const div = document.createElement('div');
+                div.style.cssText = 'padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 4px;';
+                div.innerHTML = `<strong>${centro.nome}:</strong> ${displayContact}`;
+                displayDiv.appendChild(div);
+            });
+        }
+
+        // Executar teste inicial
+        window.onload = function() {
+            simulateBackendData();
+        };
+    </script>
+</body>
+</html>

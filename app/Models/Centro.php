@@ -22,13 +22,15 @@ class Centro extends Model
         'contactos' => 'array',
     ];
 
-    // Um centro tem muitos cursos
+    // Relacionamento N:N com cursos (preferencial para múltiplos centros por curso)
     public function cursos()
     {
-        return $this->hasMany(Curso::class);
+        return $this->belongsToMany(Curso::class, 'centro_curso')
+        ->withPivot(['preco', 'duracao'])
+        ->withTimestamps();
     }
 
-    // N:N com formadores
+    // Relacionamento N:N com formadores
     public function formadores()
     {
         return $this->belongsToMany(Formador::class, 'centro_formador')->withTimestamps();

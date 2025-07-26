@@ -3,19 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestão de Centros - EduGest</title>
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
-  
+  <title>Gestão de Centros de Formação</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -25,15 +14,9 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+      background: linear-gradient(135deg, #66aaea 0%, #22a8f5 100%);
       min-height: 100vh;
-      padding: 10px;
-    }
-
-    @media (min-width: 768px) {
-      body {
-        padding: 20px;
-      }
+      padding: 20px;
     }
 
     .container {
@@ -46,47 +29,25 @@
     }
 
     .header {
-      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
       color: white;
-      padding: 20px;
+      padding: 30px;
       text-align: center;
     }
 
-    @media (min-width: 768px) {
-      .header {
-        padding: 30px;
-      }
-    }
-
     .header h1 {
-      font-size: 1.8rem;
+      font-size: 2.5rem;
       margin-bottom: 10px;
       font-weight: 300;
     }
 
     .header p {
       opacity: 0.9;
-      font-size: 0.9rem;
-    }
-
-    @media (min-width: 768px) {
-      .header h1 {
-        font-size: 2.5rem;
-      }
-      
-      .header p {
-        font-size: 1.1rem;
-      }
+      font-size: 1.1rem;
     }
 
     .content {
-      padding: 15px;
-    }
-
-    @media (min-width: 768px) {
-      .content {
-        padding: 30px;
-      }
+      padding: 30px;
     }
 
     .controls {
@@ -116,8 +77,8 @@
 
     .search-input:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+      border-color: #3498db;
+      box-shadow: 0 0 20px rgba(52, 152, 219, 0.2);
     }
 
     .search-icon {
@@ -149,27 +110,27 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      background: linear-gradient(135deg, #3498db, #2980b9);
       color: white;
     }
 
     .btn-success {
-      background: linear-gradient(135deg, #2563eb, #1e40af);
+      background: linear-gradient(135deg, #27ae60, #229954);
       color: white;
     }
 
     .btn-warning {
-      background: linear-gradient(135deg, #60a5fa, #3b82f6);
+      background: linear-gradient(135deg, #f39c12, #e67e22);
       color: white;
     }
 
     .btn-danger {
-      background: linear-gradient(135deg, #1e40af, #1e3a8a);
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
       color: white;
     }
 
     .btn-secondary {
-      background: linear-gradient(135deg, #94a3b8, #64748b);
+      background: linear-gradient(135deg, #95a5a6, #7f8c8d);
       color: white;
     }
 
@@ -192,35 +153,20 @@
     }
 
     .table th {
-      background: linear-gradient(135deg, #1e40af, #1e3a8a);
+      background: linear-gradient(135deg, #34495e, #2c3e50);
       color: white;
-      padding: 15px 10px;
+      padding: 20px 15px;
       text-align: left;
       font-weight: 600;
       text-transform: uppercase;
-      font-size: 12px;
+      font-size: 14px;
       letter-spacing: 1px;
     }
 
-    @media (min-width: 768px) {
-      .table th {
-        padding: 20px 15px;
-        font-size: 14px;
-      }
-    }
-
     .table td {
-      padding: 10px 8px;
+      padding: 15px;
       border-bottom: 1px solid #f0f0f0;
       vertical-align: middle;
-      font-size: 14px;
-    }
-
-    @media (min-width: 768px) {
-      .table td {
-        padding: 15px;
-        font-size: 16px;
-      }
     }
 
     .table tr:hover {
@@ -238,19 +184,13 @@
     }
 
     .contacto-tag {
-      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-      color: #1e40af;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      color: #1976d2;
       padding: 4px 12px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 500;
-      border: 1px solid #93c5fd;
-    }
-
-    @media (min-width: 768px) {
-      .contacto-tag {
-        font-size: 12px;
-      }
+      border: 1px solid #90caf9;
     }
 
     .actions {
@@ -360,6 +300,7 @@
         height: 98vh;
         max-height: 98vh;
         border-radius: 10px;
+        margin: 1vh;
         position: fixed;
         top: 1vh;
         left: 1vw;
@@ -445,19 +386,13 @@
     }
 
     .modal-header {
-      background: linear-gradient(135deg, #1e40af, #1e3a8a);
+      background: linear-gradient(135deg, #66aaea, #4b78a2);
       color: white;
-      padding: 20px 25px;
+      padding: 25px 30px;
       border-radius: 20px 20px 0 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    @media (min-width: 768px) {
-      .modal-header {
-        padding: 25px 30px;
-      }
     }
 
     .modal-header h2 {
@@ -478,13 +413,7 @@
     }
 
     .modal-body {
-      padding: 20px;
-    }
-
-    @media (min-width: 768px) {
-      .modal-body {
-        padding: 30px;
-      }
+      padding: 30px;
     }
 
     .form-group {
@@ -495,16 +424,10 @@
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
-      color: #1e3a8a;
-      font-size: 13px;
+      color: #2c3e50;
+      font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-    }
-
-    @media (min-width: 768px) {
-      .form-label {
-        font-size: 14px;
-      }
     }
 
     .form-control {
@@ -519,18 +442,18 @@
 
     .form-control:focus {
       outline: none;
-      border-color: #3b82f6;
+      border-color: #3498db;
       background: white;
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 0 20px rgba(52, 152, 219, 0.1);
     }
 
     .form-control.is-invalid {
-      border-color: #1e40af;
-      background: #f1f5f9;
+      border-color: #e74c3c;
+      background: #fdf2f2;
     }
 
     .invalid-feedback {
-      color: #1e40af;
+      color: #e74c3c;
       font-size: 14px;
       margin-top: 5px;
       display: none;
@@ -566,14 +489,14 @@
     .btn-add-contact {
       width: 100%;
       margin-top: 15px;
-      border: 2px dashed #3b82f6;
+      border: 2px dashed #3498db;
       background: transparent;
-      color: #3b82f6;
+      color: #3498db;
       font-weight: 600;
     }
 
     .btn-add-contact:hover {
-      background: #3b82f6;
+      background: #3498db;
       color: white;
     }
 
@@ -600,15 +523,15 @@
     }
 
     .alert-success {
-      background: #dbeafe;
-      border-color: #3b82f6;
-      color: #1e40af;
+      background: #d4edda;
+      border-color: #27ae60;
+      color: #155724;
     }
 
     .alert-danger {
-      background: #f1f5f9;
-      border-color: #1e40af;
-      color: #1e3a8a;
+      background: #f8d7da;
+      border-color: #e74c3c;
+      color: #721c24;
     }
 
     .empty-state {
@@ -625,7 +548,7 @@
 
     .empty-state h3 {
       margin-bottom: 10px;
-      color: #1e3a8a;
+      color: #2c3e50;
     }
 
     .stats {
@@ -637,29 +560,17 @@
 
     .stat-card {
       background: white;
-      padding: 20px;
+      padding: 25px;
       border-radius: 15px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       text-align: center;
-      border-left: 5px solid #3b82f6;
-    }
-
-    @media (min-width: 768px) {
-      .stat-card {
-        padding: 25px;
-      }
+      border-left: 5px solid #3498db;
     }
 
     .stat-card h3 {
-      font-size: 1.8rem;
-      color: #1e3a8a;
+      font-size: 2rem;
+      color: #2c3e50;
       margin-bottom: 5px;
-    }
-
-    @media (min-width: 768px) {
-      .stat-card h3 {
-        font-size: 2rem;
-      }
     }
 
     .stat-card p {
@@ -670,68 +581,10 @@
       letter-spacing: 0.5px;
     }
 
-    /* Mobile First - Breakpoints detalhados */
-    @media (max-width: 480px) {
-      .container {
-        margin: 5px;
-        border-radius: 10px;
-      }
-      
-      .controls {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .search-container {
-        max-width: none;
-      }
-
-      .table-container {
-        overflow-x: auto;
-        border-radius: 10px;
-      }
-
-      .table {
-        min-width: 600px;
-        font-size: 12px;
-      }
-
-      .table th {
-        padding: 8px 5px;
-        font-size: 10px;
-      }
-
-      .table td {
-        padding: 8px 5px;
-        font-size: 12px;
-      }
-
-      .actions {
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      .btn {
-        font-size: 14px;
-        padding: 10px 15px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .contacto-tag {
-        font-size: 10px;
-        padding: 3px 8px;
-      }
-    }
-
-    @media (min-width: 481px) and (max-width: 768px) {
+    @media (max-width: 768px) {
       .controls {
         flex-direction: column;
         align-items: stretch;
-        gap: 15px;
       }
 
       .search-container {
@@ -743,183 +596,117 @@
       }
 
       .table {
-        min-width: 700px;
+        min-width: 800px;
       }
 
       .actions {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 5px;
+        flex-direction: column;
+      }
+
+      .modal-content {
+        width: 95%;
+        margin: 20px;
       }
 
       .stats {
         grid-template-columns: 1fr;
-      }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .table {
-        font-size: 15px;
-      }
-    }
-
-    @media (min-width: 1025px) {
-      .stats {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
-    }
-
-    /* Ultra wide screens */
-    @media (min-width: 1400px) {
-      .container {
-        max-width: 1600px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <a href="index.html" class="logo">
-      <i class="fas fa-graduation-cap"></i>
-      <span>EduGest</span>
-    </a>
-    
-    <div class="nav-links">
-      <a href="index.html" class="nav-link">
-        <i class="fas fa-home"></i>
-        Início
-      </a>
-      <a href="centros.html" class="nav-link active">
-        <i class="fas fa-building"></i>
-        Centros
-      </a>
-      <a href="cursos.html" class="nav-link">
-      <i class="fas fa-book"></i>
-      Cursos
-      </a>
-      <a href="formadores.html" class="nav-link">
-      <i class="fas fa-chalkboard-teacher"></i>
-      Formadores
-      </a>
-            <a href="horarios.html" class="nav-link">
-                <i class="fas fa-clock"></i>
-                Horários
-            </a>
-            <a href="dashboard.html" class="nav-link">
-                <i class="fas fa-chart-dashboard"></i>
-                Dashboard
-            </a>
-      <button id="theme-toggle" class="btn btn-outline btn-sm">
-        <i class="fas fa-moon"></i>
-      </button>
-    </div>
-  </nav>
-
   <div class="container">
-    <!-- Header -->
-    <div class="card mb-3">
-      <div class="card-header">
-        <div class="card-title">
-          <div class="card-icon">
-            <i class="fas fa-building"></i>
-          </div>
-          Gestão de Centros
+    <div class="header">
+      <h1><i class="fas fa-building"></i> Gestão de Centros</h1>
+      <p>Sistema completo de gestão de centros de formação</p>
+    </div>
+
+    <div class="content">
+      <!-- Estatísticas -->
+      <div class="stats">
+        <div class="stat-card">
+          <h3 id="total-centros">0</h3>
+          <p>Total de Centros</p>
         </div>
       </div>
-      <p style="color: #666; margin: 0;">
-        Sistema completo de gestão de centros de formação
-      </p>
-    </div>
 
-    <!-- Estatísticas -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number" id="total-centros">0</div>
-        <div class="stat-label">Total de Centros</div>
+      <!-- Controles -->
+      <div class="controls">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="busca" class="search-input" placeholder="Buscar por nome ou localização...">
+        </div>
+        <button class="btn btn-primary" onclick="abrirModal('criar')">
+          <i class="fas fa-plus"></i> Novo Centro
+        </button>
       </div>
-    </div>
 
-    <!-- Controles -->
-    <div class="flex-between mb-3">
-      <div class="input-group" style="max-width: 400px;">
-        <input type="text" id="busca" class="form-control" placeholder="Buscar por nome ou localização...">
-        <i class="fas fa-search input-group-icon"></i>
+      <!-- Tabela -->
+      <div class="table-container">
+        <table class="table" id="tabela-centros">
+          <thead>
+            <tr>
+              <th><i class="fas fa-hashtag"></i> ID</th>
+              <th><i class="fas fa-building"></i> Nome</th>
+              <th><i class="fas fa-map-marker-alt"></i> Localização</th>
+              <th><i class="fas fa-phone"></i> Contactos</th>
+              <th><i class="fas fa-envelope"></i> Email</th>
+              <th><i class="fas fa-cogs"></i> Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
-      <button class="btn btn-primary" onclick="abrirModal('criar')">
-        <i class="fas fa-plus"></i> Novo Centro
-      </button>
-    </div>
-
-    <!-- Tabela -->
-    <div class="table-container">
-      <table class="table" id="tabela-centros">
-        <thead>
-          <tr>
-            <th><i class="fas fa-hashtag"></i> ID</th>
-            <th><i class="fas fa-building"></i> Nome</th>
-            <th><i class="fas fa-map-marker-alt"></i> Localização</th>
-            <th><i class="fas fa-phone"></i> Contactos</th>
-            <th><i class="fas fa-envelope"></i> Email</th>
-            <th><i class="fas fa-cogs"></i> Ações</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
     </div>
   </div>
 
   <!-- Modal de Confirmação de Eliminação -->
   <div id="modal-delete" class="modal">
     <div class="modal-content" style="max-width: 500px;">
-      <div class="modal-header" style="background: linear-gradient(135deg, #1e40af, #1e3a8a);">
+      <div class="modal-header" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
         <h2><i class="fas fa-exclamation-triangle"></i> Confirmar Eliminação</h2>
         <span class="close" onclick="fecharModalDelete()">&times;</span>
       </div>
       <div class="modal-body">
         <div style="text-align: center; margin-bottom: 25px;">
-          <i class="fas fa-trash-alt" style="font-size: 3rem; color: #1e40af; opacity: 0.7;"></i>
+          <i class="fas fa-trash-alt" style="font-size: 4rem; color: #e74c3c; opacity: 0.7;"></i>
         </div>
         
-        <div style="background: #dbeafe; border: 1px solid #93c5fd; border-radius: 10px; padding: 15px; margin-bottom: 25px;">
-          <h3 style="color: #1e3a8a; margin-bottom: 10px; font-size: 1.1rem;">
-            <i class="fas fa-exclamation-triangle" style="color: #3b82f6;"></i>
+        <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 10px; padding: 20px; margin-bottom: 25px;">
+          <h3 style="color: #856404; margin-bottom: 10px; font-size: 1.2rem;">
+            <i class="fas fa-exclamation-triangle" style="color: #f39c12;"></i>
             Atenção: Esta ação é irreversível!
           </h3>
-          <p style="color: #1e40af; margin: 0; font-weight: 500; font-size: 14px;">
+          <p style="color: #856404; margin: 0; font-weight: 500;">
             Todos os dados do centro serão perdidos permanentemente.
           </p>
         </div>
 
-        <div style="background: #f8fafc; border-radius: 10px; padding: 15px; margin-bottom: 25px;">
-          <h4 style="color: #1e3a8a; margin-bottom: 15px; font-size: 1rem;">
+        <div style="background: #f8f9fa; border-radius: 10px; padding: 20px; margin-bottom: 25px;">
+          <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1rem;">
             <i class="fas fa-building"></i>
             Dados do Centro a ser Eliminado:
           </h4>
           
-          <div style="display: grid; gap: 10px;">
+          <div style="display: grid; gap: 12px;">
             <div>
-              <strong style="color: #1e40af; font-size: 14px;">Nome:</strong>
-              <span id="delete-nome" style="color: #1e3a8a; margin-left: 10px; font-size: 14px;"></span>
+              <strong style="color: #34495e;">Nome:</strong>
+              <span id="delete-nome" style="color: #2c3e50; margin-left: 10px;"></span>
             </div>
             
             <div>
-              <strong style="color: #1e40af; font-size: 14px;">Localização:</strong>
-              <span id="delete-localizacao" style="color: #1e3a8a; margin-left: 10px; font-size: 14px;"></span>
+              <strong style="color: #34495e;">Localização:</strong>
+              <span id="delete-localizacao" style="color: #2c3e50; margin-left: 10px;"></span>
             </div>
             
             <div>
-              <strong style="color: #1e40af; font-size: 14px;">Contactos:</strong>
+              <strong style="color: #34495e;">Contactos:</strong>
               <div id="delete-contactos" style="margin-left: 10px; margin-top: 5px;"></div>
             </div>
             
             <div>
-              <strong style="color: #1e40af; font-size: 14px;">Email:</strong>
-              <span id="delete-email" style="color: #1e3a8a; margin-left: 10px; font-size: 14px;"></span>
+              <strong style="color: #34495e;">Email:</strong>
+              <span id="delete-email" style="color: #2c3e50; margin-left: 10px;"></span>
             </div>
           </div>
         </div>
@@ -992,19 +779,31 @@
     </div>
   </div>
 
-  <script src="js/app.js"></script>
   <script>
     let centros = [];
     let centroEdicao = null;
+    const API_BASE = 'http://127.0.0.1:8000/api';
 
-    // Utilitários - usando app.showAlert global
+    // Utilitários
     function mostrarAlert(tipo, mensagem) {
-      app.showAlert(tipo, mensagem);
+      const container = document.getElementById('alert-container');
+      container.innerHTML = `
+        <div class="alert alert-${tipo}">
+          <i class="fas fa-${tipo === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+          ${mensagem}
+        </div>
+      `;
+      setTimeout(() => container.innerHTML = '', 5000);
     }
 
-    // Usando app.setButtonLoading global
     function toggleLoading(elemento, loading) {
-      app.setButtonLoading(elemento, loading, elemento.dataset.originalText);
+      if (loading) {
+        elemento.disabled = true;
+        elemento.innerHTML = '<span class="loading"></span> Carregando...';
+      } else {
+        elemento.disabled = false;
+        elemento.innerHTML = elemento.dataset.originalText || elemento.innerHTML;
+      }
     }
 
     function limparValidacao() {
@@ -1157,16 +956,7 @@
         document.getElementById('nome').value = centro.nome;
         document.getElementById('localizacao').value = centro.localizacao;
         document.getElementById('email').value = centro.email || '';
-        
-        // Processar contactos antes de preencher
-        let contactosArray = [];
-        if (typeof centro.contactos === 'string') {
-          contactosArray = centro.contactos.split(',').map(c => c.trim()).filter(c => c);
-        } else if (Array.isArray(centro.contactos)) {
-          contactosArray = centro.contactos;
-        }
-        
-        preencherContactos(contactosArray.length > 0 ? contactosArray : ['']);
+        preencherContactos(centro.contactos);
       }
       
       modal.style.display = 'block';
@@ -1202,15 +992,7 @@
       dados.forEach(centro => {
         const tr = document.createElement('tr');
         
-        // Processar contactos (pode ser string ou array)
-        let contactosArray = [];
-        if (typeof centro.contactos === 'string') {
-          contactosArray = centro.contactos.split(',').map(c => c.trim()).filter(c => c);
-        } else if (Array.isArray(centro.contactos)) {
-          contactosArray = centro.contactos;
-        }
-        
-        const contactosHtml = contactosArray.map(contacto => 
+        const contactosHtml = centro.contactos.map(contacto => 
           `<span class="contacto-tag"><i class="fas fa-phone"></i> ${contacto}</span>`
         ).join('');
         
@@ -1220,14 +1002,14 @@
             <div style="font-weight: 600; color: #2c3e50;">${centro.nome}</div>
           </td>
           <td>
-            <i class="fas fa-map-marker-alt" style="color: #1e40af; margin-right: 5px;"></i>
+            <i class="fas fa-map-marker-alt" style="color: #e74c3c; margin-right: 5px;"></i>
             ${centro.localizacao}
           </td>
           <td>
             <div class="contactos-list">${contactosHtml}</div>
           </td>
           <td>
-            ${centro.email ? `<i class="fas fa-envelope" style="color: #3b82f6; margin-right: 5px;"></i> ${centro.email}` : '<span style="color: #bdc3c7;">Não informado</span>'}
+            ${centro.email ? `<i class="fas fa-envelope" style="color: #27ae60; margin-right: 5px;"></i> ${centro.email}` : '<span style="color: #bdc3c7;">Não informado</span>'}
           </td>
           <td>
             <div class="actions">
@@ -1251,57 +1033,65 @@
     // API
     async function carregarCentros() {
       try {
-        centros = await app.makeRequest(`${APP_CONFIG.API_BASE}/centros`);
-        renderTabela(centros);
-        atualizarEstatisticas();
+        const res = await fetch(`${API_BASE}/centros`);
+        const json = await res.json();
+        
+        if (json.status === 'sucesso') {
+          centros = json.dados;
+          renderTabela(centros);
+          atualizarEstatisticas();
+        }
       } catch (error) {
         console.error('Erro ao carregar centros:', error);
-        app.showAlert('danger', error.message || 'Erro ao carregar centros');
-        // Mostrar tabela vazia em caso de erro
-        renderTabela([]);
+        mostrarAlert('danger', 'Erro ao carregar centros. Verifique a conexão.');
       }
     }
 
     async function salvarCentro(dados) {
       const btnSubmit = document.getElementById('btn-submit');
-      const originalText = btnSubmit.innerHTML;
-      app.setButtonLoading(btnSubmit, true);
+      btnSubmit.dataset.originalText = btnSubmit.innerHTML;
+      toggleLoading(btnSubmit, true);
       
       try {
-        const url = centroEdicao ? `${APP_CONFIG.API_BASE}/centros/${centroEdicao.id}` : `${APP_CONFIG.API_BASE}/centros`;
+        const url = centroEdicao ? `${API_BASE}/centros/${centroEdicao.id}` : `${API_BASE}/centros`;
         const method = centroEdicao ? 'PUT' : 'POST';
         
-        await app.makeRequest(url, method, dados);
+        const res = await fetch(url, {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(dados)
+        });
+
+        const resultado = await res.json();
         
-        app.showAlert('success', `Centro ${centroEdicao ? 'atualizado' : 'criado'} com sucesso!`);
-        setTimeout(() => {
-          fecharModal();
-          carregarCentros();
-        }, 1500);
-        
-      } catch (error) {
-        console.error('Erro ao salvar:', error);
-        
-        if (error.errors) {
-          // Mostrar erros de validação
-          Object.keys(error.errors).forEach(campo => {
-            const input = document.getElementById(campo);
-            if (input) {
-              input.classList.add('is-invalid');
-              const feedback = input.nextElementSibling;
-              if (feedback && feedback.classList.contains('invalid-feedback')) {
-                feedback.textContent = error.errors[campo][0];
-                feedback.style.display = 'block';
-              }
-            }
-          });
+        if (res.ok && resultado.status === 'sucesso') {
+          mostrarAlert('success', resultado.mensagem);
+          setTimeout(() => {
+            fecharModal();
+            carregarCentros();
+          }, 1500);
         } else {
-          app.showAlert('danger', error.message || 'Erro ao salvar centro');
+          if (resultado.errors) {
+            const mensagens = Object.entries(resultado.errors).map(([campo, erros]) => 
+              `${campo}: ${erros.join(', ')}`
+            ).join('\n');
+            mostrarAlert('danger', `Erros de validação:\n${mensagens}`);
+          } else {
+            mostrarAlert('danger', resultado.mensagem || 'Erro ao salvar centro');
+          }
         }
+      } catch (error) {
+        console.error('Erro de rede:', error);
+        mostrarAlert('danger', 'Erro de conexão. Verifique se o servidor está rodando.');
       } finally {
-        app.setButtonLoading(btnSubmit, false, originalText);
+        toggleLoading(btnSubmit, false);
       }
     }
+
+
 
     function confirmarDelecao(id, nome) {
       // Encontrar o centro completo pelos dados
@@ -1322,14 +1112,7 @@
       
       // Preencher contactos
       const contactosContainer = document.getElementById('delete-contactos');
-      let contactosArray = [];
-      if (typeof centro.contactos === 'string') {
-        contactosArray = centro.contactos.split(',').map(c => c.trim()).filter(c => c);
-      } else if (Array.isArray(centro.contactos)) {
-        contactosArray = centro.contactos;
-      }
-      
-      const contactosHtml = contactosArray.map(contacto => 
+      const contactosHtml = centro.contactos.map(contacto => 
         `<span class="contacto-tag" style="margin: 2px;"><i class="fas fa-phone"></i> ${contacto}</span>`
       ).join('');
       contactosContainer.innerHTML = contactosHtml;
@@ -1357,15 +1140,26 @@
       btnText.innerHTML = '<span class="loading"></span> Eliminando...';
       
       try {
-        await app.makeRequest(`${APP_CONFIG.API_BASE}/centros/${id}`, 'DELETE');
+        const res = await fetch(`${API_BASE}/centros/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        const resultado = await res.json();
         
-        fecharModalDelete();
-        app.showAlert('success', 'Centro eliminado com sucesso!');
-        carregarCentros();
-        
+        if (res.ok && resultado.status === 'sucesso') {
+          // Fechar modal e mostrar sucesso
+          fecharModalDelete();
+          mostrarAlert('success', `✅ ${resultado.mensagem}`);
+          carregarCentros();
+        } else {
+          mostrarAlert('danger', resultado.mensagem || 'Erro ao deletar centro');
+        }
       } catch (error) {
         console.error('Erro ao deletar:', error);
-        app.showAlert('danger', error.message || 'Erro ao eliminar centro');
+        mostrarAlert('danger', 'Erro de conexão ao deletar centro');
       } finally {
         // Restaurar botão
         btnConfirmar.disabled = false;
@@ -1376,20 +1170,12 @@
     // Busca
     function buscarCentros(texto) {
       const filtro = texto.toLowerCase();
-      const filtrados = centros.filter(c => {
-        // Processar contactos para busca
-        let contactosString = '';
-        if (typeof c.contactos === 'string') {
-          contactosString = c.contactos;
-        } else if (Array.isArray(c.contactos)) {
-          contactosString = c.contactos.join(' ');
-        }
-        
-        return c.nome.toLowerCase().includes(filtro) ||
-               c.localizacao.toLowerCase().includes(filtro) ||
-               contactosString.includes(filtro) ||
-               (c.email && c.email.toLowerCase().includes(filtro));
-      });
+      const filtrados = centros.filter(c =>
+        c.nome.toLowerCase().includes(filtro) ||
+        c.localizacao.toLowerCase().includes(filtro) ||
+        c.contactos.some(contacto => contacto.includes(filtro)) ||
+        (c.email && c.email.toLowerCase().includes(filtro))
+      );
       renderTabela(filtrados);
     }
 

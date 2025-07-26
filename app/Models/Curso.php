@@ -9,24 +9,24 @@ class Curso extends Model
 {
     use HasFactory;
 
-        protected $fillable = [
-        'centro_id',
+
+
+    protected $fillable = [
         'nome',
         'descricao',
         'programa',
-        'duracao',
-        'preco',
         'area',
         'modalidade',
         'imagem_url',
         'ativo'
     ];
 
-
-    // Um curso pertence a um centro
-    public function centro()
+    // N:N com centros (caso o curso seja ministrado em vários centros)
+    public function centros()
     {
-        return $this->belongsTo(Centro::class);
+        return $this->belongsToMany(Centro::class, 'centro_curso')
+        ->withPivot(['preco', 'duracao'])
+        ->withTimestamps();
     }
 
     // Um curso tem muitos horários
@@ -40,6 +40,8 @@ class Curso extends Model
     {
         return $this->belongsToMany(Formador::class, 'curso_formador')->withTimestamps();
     }
+
+
     // Um curso pode ter muitas pré-inscrições
     public function preInscricoes()
     {

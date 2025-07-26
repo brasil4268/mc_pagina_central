@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Formação - Transforme seu Futuro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="modern-styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">FormAcademy</span>
+                    <span class="brand-subtitle">Centro de Formação</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active" data-target="home">
+                    <i class="fas fa-home"></i>
+                    <span>Início</span>
+                </a>
+                <a href="#centers" class="nav-link" data-target="centers">
+                    <i class="fas fa-building"></i>
+                    <span>Centros</span>
+                </a>
+                <a href="#courses" class="nav-link" data-target="courses">
+                    <i class="fas fa-book-open"></i>
+                    <span>Cursos</span>
+                </a>
+                <a href="#about" class="nav-link" data-target="about">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Sobre</span>
+                </a>
+                <a href="#contact" class="nav-link" data-target="contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contacto</span>
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="btn-reload" onclick="reloadData()" title="Recarregar dados">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <a href="admin-new.html" class="btn-admin">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin</span>
+                </a>
+                <button class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="hero-particles"></div>
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
+                    <h1 class="hero-title">
+                        <span class="title-line">Transforme</span>
+                        <span class="title-line highlight">seu Futuro</span>
+                        <span class="title-line">com Formação</span>
+                        <span class="title-line accent">de Qualidade</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Descubra cursos profissionais inovadores com formadores especializados 
+                        e metodologias modernas para acelerar sua carreira.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="scrollToSection('courses')">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Ver Todos os Cursos</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('centers')">
+                            <i class="fas fa-building"></i>
+                            <span>Conhecer os Centros</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="hero-stats" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-centers">0</div>
+                        <div class="stat-label">Centros</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-courses">0</div>
+                        <div class="stat-label">Cursos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-students">1200+</div>
+                        <div class="stat-label">Estudantes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-trainers">0</div>
+                        <div class="stat-label">Formadores</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll">
+            <div class="scroll-indicator" onclick="scrollToSection('centers')">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Centers Section -->
+    <section id="centers" class="section centers-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">Localizações</div>
+                <h2 class="section-title">Nossos Centros</h2>
+                <p class="section-description">
+                    Centros estrategicamente localizados para sua conveniência, 
+                    equipados com tecnologia moderna e ambiente inspirador.
+                </p>
+            </div>
+            
+            <div class="centers-grid" id="centers-grid">
+                <!-- Centers will be loaded dynamically -->
+                <div class="loading-skeleton">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section courses-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">Educação</div>
+                <h2 class="section-title">Cursos Disponíveis</h2>
+                <p class="section-description">
+                    Programas de formação cuidadosamente desenvolvidos para 
+                    impulsionar sua carreira e expandir suas competências.
+                </p>
+            </div>
+            
+            <div class="course-filters" data-aos="fade-up" data-aos-delay="100">
+                <div class="filter-group">
+                    <div class="filter-item">
+                        <select id="center-filter" class="custom-select">
+                            <option value="">Todos os Centros</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <select id="area-filter" class="custom-select">
+                            <option value="">Todas as Áreas</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <select id="modalidade-filter" class="custom-select">
+                            <option value="">Modalidade</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="online">Online</option>
+                        </select>
+                    </div>
+                    <button class="btn-filter-clear" onclick="clearFilters()">
+                        <i class="fas fa-times"></i>
+                        Limpar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="courses-grid" id="courses-grid">
+                <!-- Courses will be loaded dynamically -->
+                <div class="loading-skeleton">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <div class="section-subtitle">Excelência</div>
+                    <h2 class="section-title">Por que Escolher-nos?</h2>
+                    <p class="about-description">
+                        Somos mais que um centro de formação. Somos parceiros na sua 
+                        jornada de crescimento profissional e pessoal.
+                    </p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Qualidade Garantida</h3>
+                                <p>Formadores certificados e metodologias comprovadas</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Horários Flexíveis</h3>
+                                <p>Adaptamos aos seus horários e necessidades</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Certificação</h3>
+                                <p>Certificados reconhecidos no mercado</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Suporte Contínuo</h3>
+                                <p>Acompanhamento durante e após o curso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual" data-aos="fade-left">
+                    <div class="visual-card">
+                        <div class="card-content">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Experiência Transformadora</h3>
+                            <p>Mais de 10 anos formando profissionais de sucesso</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">Contacto</div>
+                <h2 class="section-title">Fale Connosco</h2>
+                <p class="section-description">
+                    Estamos prontos para ajudar no seu percurso de formação. 
+                    Entre em contacto e descubra como podemos apoiá-lo.
+                </p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h3>Telefone</h3>
+                            <p>+351 000 000 000</p>
+                            <span>Seg-Sex, 9h-18h</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h3>Email</h3>
+                            <p>info@formacademy.ao</p>
+                            <span>Resposta em 24h</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h3>Localização</h3>
+                            <p>Luanda, Angola</p>
+                            <span>Vários centros disponíveis</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper" data-aos="fade-left">
+                    <div class="form-card">
+                        <h3>Envie uma Mensagem</h3>
+                        <form class="contact-form" id="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="name" required>
+                                <label for="name">Nome Completo</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" required>
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" required>
+                                <label for="phone">Telefone</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" rows="4" required></textarea>
+                                <label for="message">Mensagem</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Enviar Mensagem</span>
+                            <div class="btn-glow"></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Modal -->
+    <div class="modal" id="course-modal">
+        <div class="modal-overlay" onclick="closeModal('course-modal')"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-course-title">Título do Curso</h2>
+                <button class="modal-close" onclick="closeModal('course-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <div class="course-modal-grid">
+                    <div class="course-details">
+                        <div class="course-image-modal">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        
+                        <div class="course-info-modal">
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="modal-course-duration">Duração</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-euro-sign"></i>
+                                    <span id="modal-course-price">Preço</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-tag"></i>
+                                    <span id="modal-course-area">Área</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-laptop"></i>
+                                    <span id="modal-course-modalidade">Modalidade</span>
+                                </div>
+                            </div>
+                            
+                            <div class="course-description">
+                                <h3>Descrição</h3>
+                                <p id="modal-course-description">Descrição do curso</p>
+                            </div>
+                            
+                            <div class="course-program">
+                                <h3>Programa</h3>
+                                <p id="modal-course-program">Programa do curso</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-sidebar">
+                        <div class="sidebar-section">
+                            <h3>Horários</h3>
+                            <div id="modal-course-schedules" class="schedules-list">
+                                <!-- Schedules will be loaded -->
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <h3>Carga Horária</h3>
+                            <div id="modal-course-workload" class="workload-container">
+                                <!-- Workload will be calculated -->
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <h3>Formadores</h3>
+                            <div id="modal-course-trainers" class="trainers-list">
+                                <!-- Trainers will be loaded -->
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <button class="btn btn-primary btn-full" id="pre-register-btn">
+                            <i class="fas fa-edit"></i>
+                            <span>Fazer Pré-Inscrição</span>
+                            <div class="btn-glow"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pre-registration Modal -->
+    <div class="modal" id="preregister-modal">
+        <div class="modal-overlay" onclick="closeModal('preregister-modal')"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Pré-inscrição no Curso</h2>
+                <button class="modal-close" onclick="closeModal('preregister-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <form class="preregister-form" id="preregister-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <input type="text" id="nome_completo" name="nome_completo" required>
+                            <label for="nome_completo">Nome Completo *</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="pr_email" name="email" required>
+                            <label for="pr_email">Email *</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="telefone" name="telefone" required>
+                            <label for="telefone">Telefone *</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="horario_id" name="horario_id" class="custom-select">
+                                <option value="">Selecione um período</option>
+                            </select>
+                            <label for="horario_id">Período de Preferência *</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+                        <label for="observacoes">Observações (opcional)</label>
+                    </div>
+                    
+                    <input type="hidden" id="pr_curso_id" name="curso_id">
+                    <input type="hidden" id="pr_centro_id" name="centro_id">
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('preregister-modal')">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Enviar Pré-Inscrição</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+        </div>
+        <div class="loading-text">Carregando...</div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-text"></span>
+        </div>
+        <button class="notification-close" onclick="closeNotification()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="modern-script.js"></script>
+</body>
+</html>
