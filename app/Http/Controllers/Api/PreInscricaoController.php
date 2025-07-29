@@ -90,7 +90,7 @@ class PreInscricaoController extends Controller
     public function index()
     {
         $preInscricoes = PreInscricao::with(['curso', 'centro', 'horario'])->get();
-        return response()->json(['status' => 'sucesso', 'dados' => $preInscricoes]);
+        return response()->json($preInscricoes);
     }
 
 

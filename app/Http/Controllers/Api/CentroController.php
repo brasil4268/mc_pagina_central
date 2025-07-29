@@ -23,11 +23,8 @@ class CentroController extends Controller
  */
     public function index()
     {
-        // Retorna todos os centros
-        return response()->json([
-            'status' => 'sucesso',
-            'dados' => Centro::all()
-        ]);
+        // Retorna todos os centros diretamente como array
+        return response()->json(Centro::all());
     }
 
 /**

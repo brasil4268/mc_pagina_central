@@ -24,7 +24,7 @@ class FormadorController extends Controller
     public function index()
     {
         $formadores = Formador::with(['cursos', 'centros'])->get();
-        return response()->json(['status' => 'sucesso', 'dados' => $formadores]);
+        return response()->json($formadores);
     }
 
 

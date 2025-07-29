@@ -24,7 +24,7 @@ class HorarioController extends Controller
      public function index()
     {
         $horarios = Horario::with('curso')->get();
-        return response()->json(['status' => 'sucesso', 'dados' => $horarios]);
+        return response()->json($horarios);
     }
 
 

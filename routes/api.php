@@ -70,3 +70,25 @@ Route::get('/pre-inscricoes', [PreInscricaoController::class, 'index']); // Admi
 Route::put('/pre-inscricoes/{id}', [PreInscricaoController::class, 'update']); // Admin
 Route::get('/pre-inscricoes/{id}', [PreInscricaoController::class, 'show']);
 Route::delete('/pre-inscricoes/{id}', [PreInscricaoController::class, 'destroy']);
+
+//ROTAS PARA CATEGORIAS
+use App\Http\Controllers\CategoriaController;
+
+Route::get('/categorias', [CategoriaController::class, 'index']);
+Route::post('/categorias', [CategoriaController::class, 'store']);
+Route::get('/categorias/{categoria}', [CategoriaController::class, 'show']);
+Route::put('/categorias/{categoria}', [CategoriaController::class, 'update']);
+Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy']);
+
+//ROTAS PARA PRODUTOS
+use App\Http\Controllers\ProdutoController;
+
+Route::get('/produtos', [ProdutoController::class, 'index']);
+Route::post('/produtos', [ProdutoController::class, 'store']);
+Route::get('/produtos/{produto}', [ProdutoController::class, 'show']);
+Route::put('/produtos/{produto}', [ProdutoController::class, 'update']);
+Route::delete('/produtos/{produto}', [ProdutoController::class, 'destroy']);
+
+// Rotas específicas para a página pública
+Route::get('/produtos/em-destaque', [ProdutoController::class, 'emDestaque']);
+Route::get('/categorias/{categoria}/produtos', [ProdutoController::class, 'porCategoria']);

@@ -105,7 +105,7 @@ class CursoController extends Controller
             $cursos = $query->get();
         }
 
-        return response()->json(['status' => 'sucesso', 'dados' => $cursos]);
+        return response()->json($cursos);
     }
 
     /**
