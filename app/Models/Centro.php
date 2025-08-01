@@ -1,5 +1,11 @@
 <?php
 
+/* ==============================================
+   MODEL: CENTRO
+   DESCRIÇÃO: Representa os centros de formação onde os cursos são ministrados
+   TABELA: centros
+   ============================================== */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,20 +15,33 @@ class Centro extends Model
 {
     use HasFactory;
 
-    // Libera os campos para inserção em massa (mass assignment)
+    /* ==============================================
+       CAMPOS PERMITIDOS PARA INSERÇÃO EM MASSA
+       ============================================== */
     protected $fillable = [
-        'nome',
-        'localizacao',
-        'contactos',
-        'email',
+        'nome',         // Nome do centro (ex: "Centro Viana")
+        'localizacao',  // Endereço completo do centro
+        'contactos',    // Array JSON com telefones de contacto
+        'email',        // Email de contacto do centro
     ];
 
-    // Converte automaticamente JSON para array e vice-versa
+    /* ==============================================
+       CONVERSÕES AUTOMÁTICAS DE TIPOS (CASTING)
+       ============================================== */
     protected $casts = [
-        'contactos' => 'array',
+        'contactos' => 'array',  // Converte JSON ↔ Array automaticamente
     ];
 
-    // Relacionamento N:N com cursos (preferencial para múltiplos centros por curso)
+    /* ==============================================
+       RELACIONAMENTOS ELOQUENT
+       ============================================== */
+    
+    /**
+     * RELACIONAMENTO: MUITOS-PARA-MUITOS com CURSOS
+     * DESCRIÇÃO: Um centro pode oferecer vários cursos, e um curso pode estar em vários centros
+     * TABELA PIVOT: centro_curso
+     * CAMPOS EXTRAS: preco, duracao, data_arranque (específicos por centro)
+     */
     public function cursos()
     {
         return $this->belongsToMany(Curso::class, 'centro_curso')
@@ -30,7 +49,11 @@ class Centro extends Model
         ->withTimestamps();
     }
 
-    // Relacionamento N:N com formadores
+    /**
+     * RELACIONAMENTO: MUITOS-PARA-MUITOS com FORMADORES
+     * DESCRIÇÃO: Um centro pode ter vários formadores, e um formador pode trabalhar em vários centros
+     * TABELA PIVOT: centro_formador
+     */
     public function formadores()
     {
         return $this->belongsToMany(Formador::class, 'centro_formador')->withTimestamps();

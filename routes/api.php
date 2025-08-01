@@ -1,5 +1,12 @@
 <?php
 
+/* ==============================================
+   ARQUIVO: ROTAS API
+   DESCRIÇÃO: Define todas as rotas da API REST
+   PREFIXO: /api (definido no RouteServiceProvider)
+   FORMATO: JSON responses
+   ============================================== */
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,81 +21,109 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/* ==============================================
+   ROTA: AUTENTICAÇÃO COM SANCTUM
+   DESCRIÇÃO: Retorna dados do usuário autenticado
+   ============================================== */
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
+/* ==============================================
+   API: GESTÃO DE CENTROS DE FORMAÇÃO
+   PREFIXO: /api/centros
+   CONTROLLER: Api\CentroController
+   ============================================== */
 use App\Http\Controllers\Api\CentroController;
 
-//Rota para pegar todos
-Route::get('/centros', [CentroController::class, 'index']);
-//Rota para criar
-Route::post('/centros', [CentroController::class, 'store']);
-//Rota para pegar por ID
-Route::get('/centros/{id}', [CentroController::class, 'show']);
-//Rota para update
-Route::put('/centros/{id}', [CentroController::class, 'update']);
-//Rota para o delete
-Route::delete('/centros/{id}', [CentroController::class, 'destroy']);
+Route::get('/centros', [CentroController::class, 'index']);           // GET - Listar todos os centros
+Route::post('/centros', [CentroController::class, 'store']);          // POST - Criar novo centro
+Route::get('/centros/{id}', [CentroController::class, 'show']);       // GET - Exibir centro específico
+Route::put('/centros/{id}', [CentroController::class, 'update']);     // PUT - Atualizar centro
+Route::delete('/centros/{id}', [CentroController::class, 'destroy']); // DELETE - Excluir centro
 
-
-//ROTAS PARA CURSOS
+/* ==============================================
+   API: GESTÃO DE CURSOS
+   PREFIXO: /api/cursos
+   CONTROLLER: Api\CursoController
+   ============================================== */
 use App\Http\Controllers\Api\CursoController;
-//Rota para pegar todos os cursos
-Route::get('/cursos', [CursoController::class, 'index']);
-Route::post('/cursos', [CursoController::class, 'store']);
-Route::get('/cursos/{id}', [CursoController::class, 'show']);
-Route::put('/cursos/{id}', [CursoController::class, 'update']);
-Route::delete('/cursos/{id}', [CursoController::class, 'destroy']);
 
-//ROTAS PARA HORÁRIOS
+Route::get('/cursos', [CursoController::class, 'index']);             // GET - Listar todos os cursos
+Route::post('/cursos', [CursoController::class, 'store']);            // POST - Criar novo curso
+Route::get('/cursos/{id}', [CursoController::class, 'show']);         // GET - Exibir curso específico
+Route::put('/cursos/{id}', [CursoController::class, 'update']);       // PUT - Atualizar curso
+Route::delete('/cursos/{id}', [CursoController::class, 'destroy']);   // DELETE - Excluir curso
+
+/* ==============================================
+   API: GESTÃO DE HORÁRIOS DE TURMAS
+   PREFIXO: /api/horarios
+   CONTROLLER: Api\HorarioController
+   ============================================== */
 use App\Http\Controllers\Api\HorarioController;
 
-Route::get('/horarios', [HorarioController::class, 'index']);
-Route::post('/horarios', [HorarioController::class, 'store']);
-Route::get('/horarios/{id}', [HorarioController::class, 'show']);
-Route::put('/horarios/{id}', [HorarioController::class, 'update']);
-Route::delete('/horarios/{id}', [HorarioController::class, 'destroy']);
+Route::get('/horarios', [HorarioController::class, 'index']);         // GET - Listar todos os horários
+Route::post('/horarios', [HorarioController::class, 'store']);        // POST - Criar novo horário
+Route::get('/horarios/{id}', [HorarioController::class, 'show']);     // GET - Exibir horário específico
+Route::put('/horarios/{id}', [HorarioController::class, 'update']);   // PUT - Atualizar horário
+Route::delete('/horarios/{id}', [HorarioController::class, 'destroy']); // DELETE - Excluir horário
 
-//ROTAS PARA FORMADORES
+/* ==============================================
+   API: GESTÃO DE FORMADORES
+   PREFIXO: /api/formadores
+   CONTROLLER: Api\FormadorController
+   ============================================== */
 use App\Http\Controllers\Api\FormadorController;
 
-Route::get('/formadores', [FormadorController::class, 'index']);
-Route::post('/formadores', [FormadorController::class, 'store']);
-Route::get('/formadores/{id}', [FormadorController::class, 'show']);
-Route::put('/formadores/{id}', [FormadorController::class, 'update']);
-Route::delete('/formadores/{id}', [FormadorController::class, 'destroy']);
+Route::get('/formadores', [FormadorController::class, 'index']);      // GET - Listar todos os formadores
+Route::post('/formadores', [FormadorController::class, 'store']);     // POST - Criar novo formador
+Route::get('/formadores/{id}', [FormadorController::class, 'show']);  // GET - Exibir formador específico
+Route::put('/formadores/{id}', [FormadorController::class, 'update']); // PUT - Atualizar formador
+Route::delete('/formadores/{id}', [FormadorController::class, 'destroy']); // DELETE - Excluir formador
 
-
-//ROTAS PARA PRE_INSCRIÇÕES
+/* ==============================================
+   API: GESTÃO DE PRÉ-INSCRIÇÕES
+   PREFIXO: /api/pre-inscricoes
+   CONTROLLER: Api\PreInscricaoController
+   ============================================== */
 use App\Http\Controllers\Api\PreInscricaoController;
 
-Route::post('/pre-inscricoes', [PreInscricaoController::class, 'store']); // Usuário
-Route::get('/pre-inscricoes', [PreInscricaoController::class, 'index']); // Admin
-Route::put('/pre-inscricoes/{id}', [PreInscricaoController::class, 'update']); // Admin
-Route::get('/pre-inscricoes/{id}', [PreInscricaoController::class, 'show']);
-Route::delete('/pre-inscricoes/{id}', [PreInscricaoController::class, 'destroy']);
+Route::post('/pre-inscricoes', [PreInscricaoController::class, 'store']);    // POST - Criar pré-inscrição (público)
+Route::get('/pre-inscricoes', [PreInscricaoController::class, 'index']);     // GET - Listar pré-inscrições (admin)
+Route::get('/pre-inscricoes/{id}', [PreInscricaoController::class, 'show']); // GET - Exibir pré-inscrição específica
+Route::put('/pre-inscricoes/{id}', [PreInscricaoController::class, 'update']); // PUT - Atualizar/aprovar (admin)
+Route::delete('/pre-inscricoes/{id}', [PreInscricaoController::class, 'destroy']); // DELETE - Excluir pré-inscrição
 
-//ROTAS PARA CATEGORIAS
+/* ==============================================
+   API: GESTÃO DE CATEGORIAS (LOJA/SNACK BAR)
+   PREFIXO: /api/categorias
+   CONTROLLER: CategoriaController
+   ============================================== */
 use App\Http\Controllers\CategoriaController;
 
-Route::get('/categorias', [CategoriaController::class, 'index']);
-Route::post('/categorias', [CategoriaController::class, 'store']);
-Route::get('/categorias/{categoria}', [CategoriaController::class, 'show']);
-Route::put('/categorias/{categoria}', [CategoriaController::class, 'update']);
-Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy']);
+Route::get('/categorias', [CategoriaController::class, 'index']);     // GET - Listar categorias (com filtros)
+Route::post('/categorias', [CategoriaController::class, 'store']);    // POST - Criar nova categoria
+Route::get('/categorias/{categoria}', [CategoriaController::class, 'show']); // GET - Exibir categoria específica
+Route::put('/categorias/{categoria}', [CategoriaController::class, 'update']); // PUT - Atualizar categoria
+Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy']); // DELETE - Excluir categoria
 
-//ROTAS PARA PRODUTOS
+/* ==============================================
+   API: GESTÃO DE PRODUTOS (LOJA/SNACK BAR)
+   PREFIXO: /api/produtos
+   CONTROLLER: ProdutoController
+   ============================================== */
 use App\Http\Controllers\ProdutoController;
 
-Route::get('/produtos', [ProdutoController::class, 'index']);
-Route::post('/produtos', [ProdutoController::class, 'store']);
-Route::get('/produtos/{produto}', [ProdutoController::class, 'show']);
-Route::put('/produtos/{produto}', [ProdutoController::class, 'update']);
-Route::delete('/produtos/{produto}', [ProdutoController::class, 'destroy']);
+// CRUD básico de produtos
+Route::get('/produtos', [ProdutoController::class, 'index']);         // GET - Listar produtos (com filtros)
+Route::post('/produtos', [ProdutoController::class, 'store']);        // POST - Criar novo produto
+Route::get('/produtos/{produto}', [ProdutoController::class, 'show']); // GET - Exibir produto específico
+Route::put('/produtos/{produto}', [ProdutoController::class, 'update']); // PUT - Atualizar produto
+Route::delete('/produtos/{produto}', [ProdutoController::class, 'destroy']); // DELETE - Excluir produto
 
-// Rotas específicas para a página pública
-Route::get('/produtos/em-destaque', [ProdutoController::class, 'emDestaque']);
-Route::get('/categorias/{categoria}/produtos', [ProdutoController::class, 'porCategoria']);
+/* ==============================================
+   API: ROTAS ESPECIAIS PARA SITE PÚBLICO
+   DESCRIÇÃO: Endpoints específicos para exibição pública
+   ============================================== */
+Route::get('/produtos/em-destaque', [ProdutoController::class, 'emDestaque']);               // GET - Produtos em destaque
+Route::get('/categorias/{categoria}/produtos', [ProdutoController::class, 'porCategoria']); // GET - Produtos por categoria

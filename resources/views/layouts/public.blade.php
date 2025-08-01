@@ -1,41 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+    <!-- ==============================================
+         META TAGS E CONFIGURAÇÕES BÁSICAS DO SITE
+         ============================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - MC-COMERCIAL</title>
     <meta name="description" content="Centro de formação profissional especializado em diversas áreas do conhecimento">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <!-- Bootstrap CSS -->
+    <!-- ==============================================
+         BIBLIOTECAS CSS EXTERNAS
+         ============================================== -->
+    <!-- Bootstrap CSS - Framework para layout responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    <!-- Font Awesome - Biblioteca de ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- ==============================================
+         ESTILOS CSS PERSONALIZADOS DO SITE PÚBLICO
+         ============================================== -->
     <style>
+        /* ===========================================
+           VARIÁVEIS CSS GLOBAIS - CORES DO TEMA
+           =========================================== */
         :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #334155;
-            --accent-color: #3b82f6;
-            --light-gray: #f1f5f9;
-            --dark-gray: #475569;
-            --white: #ffffff;
-            --text-color: #1e293b;
+            --primary-color: #1e3a8a;      /* Azul principal */
+            --secondary-color: #334155;    /* Cinza escuro para texto */
+            --accent-color: #3b82f6;       /* Azul claro para destaques */
+            --light-gray: #f1f5f9;         /* Cinza claro para fundos */
+            --dark-gray: #475569;          /* Cinza escuro */
+            --white: #ffffff;              /* Branco */
+            --text-color: #1e293b;         /* Cor do texto principal */
         }
         
+        /* ===========================================
+           RESET CSS BÁSICO
+           =========================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        /* ===========================================
+           CONFIGURAÇÕES GERAIS DO BODY
+           =========================================== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
         }
         
-        /* Header */
+        /* ===========================================
+           ESTILOS DO CABEÇALHO (HEADER)
+           =========================================== */
         .main-header {
             background: var(--white);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -575,12 +595,12 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <i class="fas fa-envelope me-2"></i>info@mcformacao.pt
+                    <i class="fas fa-envelope me-2"></i>mucuanha.chineva@gmail.com
                     <span class="mx-3">|</span>
-                    <i class="fas fa-phone me-2"></i>+351 123 456 789
+                    <i class="fas fa-phone me-2"></i>+244 928-966-002
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <i class="fas fa-clock me-2"></i>Seg - Sex: 9h00 - 18h00
+                    <i class="fas fa-clock me-2"></i>Seg - Sex: 8h00 - 18h00
                 </div>
             </div>
         </div>
@@ -590,9 +610,13 @@
     <header class="main-header">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('public.home') }}">
-                    <i class="fas fa-graduation-cap me-2"></i>MC-COMERCIAL
-                </a>
+                
+            
+    <a class="navbar-brand" href="{{ route('public.home') }}">
+    <img src="{{ asset('images/logo.png') }}" alt="Logo MC-COMERCIAL" style="height:40px;" class="me-2">
+    MC-COMERCIAL
+    </a>
+    
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>

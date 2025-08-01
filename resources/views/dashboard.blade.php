@@ -1,32 +1,49 @@
+{{-- ==============================================
+     PÁGINA: DASHBOARD PRINCIPAL DO SISTEMA
+     DESCRIÇÃO: Página inicial do painel administrativo com visão geral
+     ============================================== --}}
 @extends('layouts.app')
 
 @section('title', 'Dashboard')
 
 @section('content')
 <div class="container-fluid">
+    <!-- ==============================================
+         CABEÇALHO DA PÁGINA DASHBOARD
+         ============================================== -->
     <div class="row mb-4">
         <div class="col-12">
+            <!-- Título principal com ícone -->
             <h1 class="display-6 mb-3">
                 <i class="fas fa-tachometer-alt me-3 text-primary"></i>Dashboard
             </h1>
+            <!-- Subtítulo explicativo -->
             <p class="text-muted">Visão geral do sistema de gestão de formação</p>
         </div>
     </div>
 
-    <!-- Cards de Estatísticas -->
+    <!-- ==============================================
+         SEÇÃO: CARDS DE ESTATÍSTICAS PRINCIPAIS
+         DESCRIÇÃO: 4 cards com métricas importantes do sistema
+         ============================================== -->
     <div class="row mb-5">
+        <!-- CARD 1: ESTATÍSTICA DE CURSOS -->
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body text-center">
+                    <!-- Layout flex para número e ícone lado a lado -->
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="flex-grow-1">
                             <h5 class="card-title text-primary mb-0">Total de Cursos</h5>
+                            <!-- Valor dinâmico carregado via AJAX -->
                             <h2 class="display-6 fw-bold mb-0" id="total-cursos">-</h2>
                         </div>
+                        <!-- Ícone de livro - representa cursos/educação -->
                         <div class="fs-1 text-primary opacity-25">
                             <i class="fas fa-book"></i>
                         </div>
                     </div>
+                    <!-- Barra de progresso visual -->
                     <div class="progress" style="height: 4px;">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 75%"></div>
                     </div>
@@ -35,14 +52,17 @@
             </div>
         </div>
 
+        <!-- CARD 2: ESTATÍSTICA DE CENTROS -->
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="flex-grow-1">
                             <h5 class="card-title text-success mb-0">Centros</h5>
+                            <!-- Valor dinâmico carregado via AJAX -->
                             <h2 class="display-6 fw-bold mb-0" id="total-centros">-</h2>
                         </div>
+                        <!-- Ícone de prédio - representa centros/locais -->
                         <div class="fs-1 text-success opacity-25">
                             <i class="fas fa-building"></i>
                         </div>
@@ -55,14 +75,17 @@
             </div>
         </div>
 
+        <!-- CARD 3: ESTATÍSTICA DE FORMADORES -->
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="flex-grow-1">
                             <h5 class="card-title text-info mb-0">Formadores</h5>
+                            <!-- Valor dinâmico carregado via AJAX -->
                             <h2 class="display-6 fw-bold mb-0" id="total-formadores">-</h2>
                         </div>
+                        <!-- Ícone de professor - representa formadores/instrutores -->
                         <div class="fs-1 text-info opacity-25">
                             <i class="fas fa-chalkboard-teacher"></i>
                         </div>
@@ -75,14 +98,17 @@
             </div>
         </div>
 
+        <!-- CARD 4: ESTATÍSTICA DE PRÉ-INSCRIÇÕES -->
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="flex-grow-1">
                             <h5 class="card-title text-warning mb-0">Pré-Inscrições</h5>
+                            <!-- Valor dinâmico carregado via AJAX -->
                             <h2 class="display-6 fw-bold mb-0" id="total-pre-inscricoes">-</h2>
                         </div>
+                        <!-- Ícone de adicionar usuário - representa inscrições -->
                         <div class="fs-1 text-warning opacity-25">
                             <i class="fas fa-user-plus"></i>
                         </div>
